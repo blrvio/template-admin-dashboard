@@ -1,9 +1,11 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { useAuth } from "src/context/auth.context";
 
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+  const {user} = useAuth();
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
@@ -50,7 +52,7 @@ const UserDropdown = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Action
+          {user ? <p>Logged in as {user.email}</p> : <button onClick={console.log('try to do login')}>Login</button>}
         </a>
         <a
           href="#pablo"
@@ -59,7 +61,7 @@ const UserDropdown = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Another action
+          Another action2
         </a>
         <a
           href="#pablo"

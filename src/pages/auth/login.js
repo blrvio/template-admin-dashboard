@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { signIn, signInWithGoogle } from '../../services/auth.service'; // Ajuste o caminho conforme necessário
 
 // layout for page
-
 import Auth from "src/layouts/Auth.js";
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const { result, error } = await signIn(email, password);
+    if (error) {
+      console.error("Error signing in:", error);
+      // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
+    } else {
+      // Redirecione o usuário ou faça outras ações após o login bem-sucedido
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const { result, error } = await signInWithGoogle();
+    if (error) {
+      console.error("Error signing in with Google:", error);
+      // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
+    } else {
+      // Redirecione o usuário ou faça outras ações após o login bem-sucedido
+      console.log(result);
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -20,14 +45,8 @@ export default function Login() {
                 </div>
                 <div className="btn-wrapper text-center">
                   <button
+                    onClick={handleGoogleLogin}
                     className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img alt="..." className="w-5 mr-1" src="/img/github.svg" />
-                    Github
-                  </button>
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                     type="button"
                   >
                     <img alt="..." className="w-5 mr-1" src="/img/google.svg" />
@@ -40,7 +59,7 @@ export default function Login() {
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign in with credentials</small>
                 </div>
-                <form>
+                <form onSubmit={handleLogin}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -50,6 +69,8 @@ export default function Login() {
                     </label>
                     <input
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
                     />
@@ -64,6 +85,8 @@ export default function Login() {
                     </label>
                     <input
                       type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                     />
@@ -84,7 +107,7 @@ export default function Login() {
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       Sign In
                     </button>
