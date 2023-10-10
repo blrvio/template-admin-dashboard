@@ -1,24 +1,27 @@
-import React from "react";
+import React from 'react';
 
 // components
 
-import CardTable from "src/components/Cards/CardTable.js";
+import CardTable from 'src/components/Cards/CardTable.js';
+import ProtectRoute from 'src/components/ProtectRoute';
 
 // layout for page
 
-import Admin from "src/layouts/Admin.js";
+import Admin from 'src/layouts/Admin.js';
 
 export default function Tables() {
   return (
     <>
-      <div className="flex flex-wrap mt-4">
-        <div className="w-full mb-12 px-4">
-          <CardTable />
+      <ProtectRoute>
+        <div className="flex flex-wrap mt-4">
+          <div className="w-full mb-12 px-4">
+            <CardTable />
+          </div>
+          <div className="w-full mb-12 px-4">
+            <CardTable color="dark" />
+          </div>
         </div>
-        <div className="w-full mb-12 px-4">
-          <CardTable color="dark" />
-        </div>
-      </div>
+      </ProtectRoute>
     </>
   );
 }

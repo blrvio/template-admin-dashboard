@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { signIn, signInWithGoogle } from '../../services/auth.service'; // Ajuste o caminho conforme necessário
 
 // layout for page
-import Auth from "src/layouts/Auth.js";
+import Auth from 'src/layouts/Auth.js';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,21 +13,23 @@ export default function Login() {
     e.preventDefault();
     const { result, error } = await signIn(email, password);
     if (error) {
-      console.error("Error signing in:", error);
+      console.error('Error signing in:', error);
       // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
     } else {
       // Redirecione o usuário ou faça outras ações após o login bem-sucedido
+      window.location.href = '/admin/dashboard';
     }
   };
 
   const handleGoogleLogin = async () => {
     const { result, error } = await signInWithGoogle();
     if (error) {
-      console.error("Error signing in with Google:", error);
+      console.error('Error signing in with Google:', error);
       // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
     } else {
       // Redirecione o usuário ou faça outras ações após o login bem-sucedido
       console.log(result);
+      window.location.href = '/admin/dashboard';
     }
   };
 

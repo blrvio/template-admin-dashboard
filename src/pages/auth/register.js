@@ -1,46 +1,49 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   signUp,
   signInWithGoogle,
   signInWithFacebook,
-} from "../../services/auth.service"; // Ajuste o caminho conforme necessário
+} from '../../services/auth.service'; // Ajuste o caminho conforme necessário
 
 // layout for page
-import Auth from "src/layouts/Auth.js";
+import Auth from 'src/layouts/Auth.js';
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const { result, error } = await signUp(email, password);
     if (error) {
-      console.error("Error signing up:", error);
+      console.error('Error signing up:', error);
       // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
     } else {
       // Redirecione o usuário ou faça outras ações após o registro bem-sucedido
+      window.location.href = '/admin/dashboard';
     }
   };
 
   const handleGoogleRegister = async () => {
     const { result, error } = await signInWithGoogle();
     if (error) {
-      console.error("Error signing up with Google:", error);
+      console.error('Error signing up with Google:', error);
       // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
     } else {
       // Redirecione o usuário ou faça outras ações após o registro bem-sucedido
+      window.location.href = '/admin/dashboard';
     }
   };
 
   const handleFacebookRegister = async () => {
     const { result, error } = await signInWithFacebook();
     if (error) {
-      console.error("Error signing up with Facebook:", error);
+      console.error('Error signing up with Facebook:', error);
       // Você pode adicionar lógica adicional para mostrar uma mensagem de erro ao usuário
     } else {
       // Redirecione o usuário ou faça outras ações após o registro bem-sucedido
+      window.location.href = '/admin/dashboard';
     }
   };
 
@@ -138,7 +141,7 @@ export default function Register() {
                         className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                       />
                       <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        I agree with the{" "}
+                        I agree with the{' '}
                         <a
                           href="#pablo"
                           className="text-lightBlue-500"

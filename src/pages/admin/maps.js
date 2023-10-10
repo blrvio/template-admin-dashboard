@@ -1,23 +1,26 @@
-import React from "react";
+import React from 'react';
 
 // components
 
-import MapExample from "src/components/Maps/MapExample.js";
+import MapExample from 'src/components/Maps/MapExample.js';
+import ProtectRoute from 'src/components/ProtectRoute';
 
 // layout for page
 
-import Admin from "src/layouts/Admin.js";
+import Admin from 'src/layouts/Admin.js';
 
 export default function Maps() {
   return (
     <>
-      <div className="flex flex-wrap">
-        <div className="w-full px-4">
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <MapExample />
+      <ProtectRoute>
+        <div className="flex flex-wrap">
+          <div className="w-full px-4">
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+              <MapExample />
+            </div>
           </div>
         </div>
-      </div>
+      </ProtectRoute>
     </>
   );
 }

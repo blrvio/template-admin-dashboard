@@ -1,22 +1,24 @@
-import React from "react";
-import { createPopper } from "@popperjs/core";
-import { useAuth } from "src/context/auth.context";
+import React from 'react';
+import { createPopper } from '@popperjs/core';
+import { useAuth } from 'src/context/auth.context';
+import { signOut } from 'src/services/auth.service';
 
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const {user} = useAuth();
+  const { user } = useAuth();
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
+      placement: 'left-end',
     });
     setDropdownPopoverShow(true);
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+  console.log(user);
   return (
     <>
       <a
@@ -33,7 +35,8 @@ const UserDropdown = () => {
             <img
               alt="..."
               className="w-full rounded-full align-middle border-none shadow-lg"
-              src="/img/team-1-800x800.jpg"
+              //TODO: definir uma imagem padrão para quando o usuário não tiver uma imagem definida.
+              src={user?.photoURL || '/img/team-1-800x800.jpg'}
             />
           </span>
         </div>
@@ -41,23 +44,27 @@ const UserDropdown = () => {
       <div
         ref={popoverDropdownRef}
         className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+          (dropdownPopoverShow ? 'block ' : 'hidden ') +
+          'bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48'
         }
       >
         <a
           href="#pablo"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
           onClick={(e) => e.preventDefault()}
         >
-          {user ? <p>Logged in as {user.email}</p> : <button onClick={console.log('try to do login')}>Login</button>}
+          {user ? (
+            <p>Logged in as {user.email}</p>
+          ) : (
+            <button onClick={console.log('try to do login')}>Login</button>
+          )}
         </a>
         <a
           href="#pablo"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
           onClick={(e) => e.preventDefault()}
         >
@@ -66,22 +73,25 @@ const UserDropdown = () => {
         <a
           href="#pablo"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
           onClick={(e) => e.preventDefault()}
         >
-          Something else here
+          Gerencie sua conta
         </a>
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
-        <a
-          href="#pablo"
+        <button
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => {
+            e.preventDefault();
+            signOut();
+            window.location.href = '/auth/login';
+          }}
         >
-          Seprated link
-        </a>
+          Sign out
+        </button>
       </div>
     </>
   );

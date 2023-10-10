@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 // components
 
-import PagesDropdown from "src/components/Dropdowns/PagesDropdown.js";
-import { main_config } from "src/common/app_config";
+import PagesDropdown from 'src/components/Dropdowns/PagesDropdown.js';
+import { main_config } from 'src/common/app_config';
 
 export default function Navbar(props) {
   return (

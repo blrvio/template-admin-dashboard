@@ -1,7 +1,7 @@
 // context/auth.js
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import React, { createContext, useState, useEffect, useContext } from "react";
-import firebase_app from "src/services/firebase.service";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import firebase_app from 'src/services/firebase.service';
 const auth = getAuth(firebase_app);
 
 const AuthContext = createContext();

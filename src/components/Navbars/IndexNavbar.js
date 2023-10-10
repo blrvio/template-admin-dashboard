@@ -1,12 +1,17 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 // components
 
-import IndexDropdown from "src/components/Dropdowns/IndexDropdown.js";
-import { main_config } from "src/common/app_config";
+import IndexDropdown from 'src/components/Dropdowns/IndexDropdown.js';
+import { main_config } from 'src/common/app_config';
+import SigninButton from '../Buttons/SigninButton';
+import { useAuth } from 'src/context/auth.context';
+import UserDropdown from '../Dropdowns/UserDropdown';
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const { user } = useAuth();
+
   return (
     <>
       <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow">
@@ -30,8 +35,8 @@ export default function Navbar(props) {
           </div>
           <div
             className={
-              "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none" +
-              (navbarOpen ? " block" : " hidden")
+              'lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none' +
+              (navbarOpen ? ' block' : ' hidden')
             }
             id="example-navbar-warning"
           >
@@ -41,16 +46,65 @@ export default function Navbar(props) {
                   className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index-navbar"
                 >
-                  <i className="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2" />{" "}
-                  Docs
+                  Produtos
+                </a>
+              </li>
+
+              <li className="flex items-center">
+                <a
+                  className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index-navbar"
+                >
+                  Soluçoes
+                </a>
+              </li>
+
+              <li className="flex items-center">
+                <a
+                  className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index-navbar"
+                >
+                  Preço
                 </a>
               </li>
             </ul>
+
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
                 <IndexDropdown />
               </li>
-              <li className="flex items-center">
+
+              {user ? (
+                <dev>
+                  <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+                    <li className="flex items-center">
+                      <a
+                        className="hover:text-blueGray-500 text-green-500 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                        href="/admin/dashboard"
+                      >
+                        Acesse o console
+                      </a>
+                    </li>
+                    <UserDropdown />
+                  </ul>
+                </dev>
+              ) : (
+                <li className="flex items-center">
+                  <button
+                    className="bg-blueGray-700 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = '/auth/login';
+                    }}
+                  >
+                    {' '}
+                    Login
+                  </button>
+                </li>
+              )}
+
+              {/* <li className="flex items-center">
                 <a
                   className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdemos.creative-tim.com%2Fnotus-nextjs%2F"
@@ -81,16 +135,7 @@ export default function Navbar(props) {
                   <i className="text-blueGray-400 fab fa-github text-lg leading-lg " />
                   <span className="lg:hidden inline-block ml-2">Star</span>
                 </a>
-              </li>
-
-              <li className="flex items-center">
-                <button
-                  className="bg-blueGray-700 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  <i className="fas fa-arrow-alt-circle-down"></i> Download
-                </button>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

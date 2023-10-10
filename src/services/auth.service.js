@@ -1,4 +1,4 @@
-import firebase_app from "./firebase.service";
+import firebase_app from './firebase.service';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   FacebookAuthProvider,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 const auth = getAuth(firebase_app);
 

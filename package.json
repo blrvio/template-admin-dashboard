@@ -24,7 +24,9 @@
     "build": "next build",
     "dev": "next dev",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run dev",
-    "build:tailwind": "tailwind build styles/index.css -o styles/tailwind.css"
+    "build:tailwind": "tailwind build styles/index.css -o styles/tailwind.css",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "autoprefixer": "10.2.5",
-    "postcss": "8.4.14"
+    "postcss": "8.4.14",
+    "prettier": "^3.0.3"
   }
 }
