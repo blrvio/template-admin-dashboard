@@ -8,6 +8,7 @@ import { main_config } from 'src/common/app_config';
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState('hidden');
+  const [currentProject, setCurrentProject] = React.useState('betaEnvironment');
   const router = useRouter();
   return (
     <>
@@ -24,7 +25,7 @@ export default function Sidebar() {
           {/* Brand */}
           <Link href="/">
             <a
-              href="#pablo"
+              href={`?project=${currentProject}`}
               className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
               {main_config.app_name}
@@ -52,7 +53,7 @@ export default function Sidebar() {
                 <div className="w-6/12">
                   <Link href="/">
                     <a
-                      href="#pablo"
+                      href={`?project=${currentProject}`}
                       className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
                       {main_config.app_name}
@@ -85,6 +86,125 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+              Frente de caixa
+            </h6>
+            {/* Navigation */}
+
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none">
+              <li className="items-center">
+                <Link href={`/services/sales/pdv?project=${currentProject}`}>
+                  <a
+                    href=""
+                    className={
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/services/sales/pdv') !== -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
+                    }
+                  >
+                    <i
+                      className={
+                        'fas fa-map-marked mr-2 text-sm ' +
+                        (router.pathname.indexOf('/services/sales/pdv') !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
+                      }
+                    ></i>{' '}
+                    PDV
+                  </a>
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link href={`/services/sales/stock?project=${currentProject}`}>
+                  <a
+                    href=""
+                    className={
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf(
+                        `/services/sales/stock?project=${currentProject}`,
+                      ) !== -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
+                    }
+                  >
+                    <i
+                      className={
+                        'fas fa-map-marked mr-2 text-sm ' +
+                        (router.pathname.indexOf(
+                          `/services/sales/stock?project=${currentProject}`,
+                        ) !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
+                      }
+                    ></i>{' '}
+                    Estoque
+                  </a>
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  href={`/services/sales/custommer?project=${currentProject}`}
+                >
+                  <a
+                    href=""
+                    className={
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/services/sales/custommer') !==
+                      -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
+                    }
+                  >
+                    <i
+                      className={
+                        'fas fa-map-marked mr-2 text-sm ' +
+                        (router.pathname.indexOf(
+                          '/services/sales/custommer',
+                        ) !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
+                      }
+                    ></i>{' '}
+                    Clientes
+                  </a>
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  href={`/services/sales/products?project=${currentProject}`}
+                >
+                  <a
+                    href=""
+                    className={
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/services/sales/products') !==
+                      -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
+                    }
+                  >
+                    <i
+                      className={
+                        'fas fa-map-marked mr-2 text-sm ' +
+                        (router.pathname.indexOf('/services/sales/products') !==
+                        -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
+                      }
+                    ></i>{' '}
+                    Produtos e serviços
+                  </a>
+                </Link>
+              </li>
+            </ul>
+
+            {/* Divider */}
+            <hr className="my-4 md:min-w-full" />
+            {/* Heading */}
+            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Admin Layout Pages
             </h6>
             {/* Navigation */}
@@ -93,7 +213,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/dashboard">
                   <a
-                    href="#pablo"
+                    href={`?project=${currentProject}`}
                     className={
                       'text-xs uppercase py-3 font-bold block ' +
                       (router.pathname.indexOf('/admin/dashboard') !== -1
@@ -117,7 +237,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/settings">
                   <a
-                    href="#pablo"
+                    href={`?project=${currentProject}`}
                     className={
                       'text-xs uppercase py-3 font-bold block ' +
                       (router.pathname.indexOf('/admin/settings') !== -1
@@ -141,7 +261,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/tables">
                   <a
-                    href="#pablo"
+                    href={`?project=${currentProject}`}
                     className={
                       'text-xs uppercase py-3 font-bold block ' +
                       (router.pathname.indexOf('/admin/tables') !== -1
@@ -165,7 +285,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/admin/maps">
                   <a
-                    href="#pablo"
+                    href={`?project=${currentProject}`}
                     className={
                       'text-xs uppercase py-3 font-bold block ' +
                       (router.pathname.indexOf('/admin/maps') !== -1
@@ -182,74 +302,6 @@ export default function Sidebar() {
                       }
                     ></i>{' '}
                     Maps
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Auth Layout Pages
-            </h6>
-            {/* Navigation */}
-
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <Link href="/auth/login">
-                  <a
-                    href="#pablo"
-                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{' '}
-                    Login
-                  </a>
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link href="/auth/register">
-                  <a
-                    href="#pablo"
-                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{' '}
-                    Register
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              No Layout Pages
-            </h6>
-            {/* Navigation */}
-
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <Link href="/landing">
-                  <a
-                    href="#pablo"
-                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{' '}
-                    Landing Page
-                  </a>
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link href="/profile">
-                  <a
-                    href="#pablo"
-                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  >
-                    <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{' '}
-                    Profile Page
                   </a>
                 </Link>
               </li>

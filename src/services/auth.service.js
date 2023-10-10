@@ -59,6 +59,7 @@ export const signInWithGoogle = async () => {
     error = null;
   try {
     const provider = new GoogleAuthProvider();
+    //TODO: adicionar um screen loader
     result = await signInWithPopup(auth, provider);
   } catch (e) {
     error = e;
