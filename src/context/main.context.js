@@ -48,9 +48,11 @@ export const MainProvider = ({ children }) => {
           thumbnail: org.thumbnail_url,
         }));
         setAvailableOrgs(items);
-        if (!selectedOrg && items.length > 0) {
-          setSelectedOrg(items[0]);
-        }
+
+        const storedOrgId = localStorage.getItem('selectedOrgId');
+        const orgToSet = items.find(org => org.id === storedOrgId) || items[0];
+        setSelectedOrg(orgToSet);
+
       } catch (error) {
         console.error('Erro ao buscar os dados da API', error);
       }
@@ -65,20 +67,10 @@ export const MainProvider = ({ children }) => {
         const projectsData = await apiRequest(`/orgs/${selectedOrg.id}/projects`);
         setAvailableProjects(projectsData);
 
-        // Se não há projetos, defina selectedProject como null e remova da URL
-        if (projectsData.length === 0) {
-          setSelectedProject(null);
-          const { project, ...restQuery } = router.query;
-          router.push({
-            pathname: router.pathname,
-            query: restQuery,
-          }, undefined, { shallow: true });
-          return;
-        }
+        const storedProjectId = localStorage.getItem('selectedProjectId');
+        const projectToSet = projectsData.find(proj => proj.id === storedProjectId) || projectsData[0];
+        setSelectedProject(projectToSet);
 
-        if (!selectedProject && projectsData.length > 0) {
-          setSelectedProject(projectsData[0]);
-        }
       } catch (error) {
         console.error('Erro ao buscar os dados da API', error);
       }
@@ -88,6 +80,7 @@ export const MainProvider = ({ children }) => {
 
   useEffect(() => {
     if (selectedProject) {
+      localStorage.setItem('selectedProjectId', selectedProject.id);
       router.push(
         {
           pathname: router.pathname,
@@ -101,6 +94,7 @@ export const MainProvider = ({ children }) => {
 
   useEffect(() => {
     if (selectedOrg) {
+      localStorage.setItem('selectedOrgId', selectedOrg.id);
       router.push(
         {
           pathname: router.pathname,

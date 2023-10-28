@@ -5,6 +5,7 @@ import { signOut } from 'src/services/auth.service';
 import '../../services/api.service';
 import { useMain } from 'src/context/main.context';
 import OrgDropdown from './OrganizationsDropdown';
+import ProjectDropdown from './ProjectsDropdown';
 
 const UserDropdown = () => {
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -26,10 +27,7 @@ const UserDropdown = () => {
     setSelectedOrg(selected);
   };
 
-  const {
-    setSelectedOrg,
-    availableOrgs,
-  } = useMain();
+  const { setSelectedOrg, availableOrgs } = useMain();
 
   return (
     <>
@@ -94,11 +92,8 @@ const UserDropdown = () => {
 
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
 
-        <OrgDropdown
-          items={availableOrgs}
-          onSelect={(orgData) => handleOrgSelect(orgData)}
-          defaultLabel="Selecione uma Org"
-        />
+        <OrgDropdown />
+        <ProjectDropdown />
 
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
         <button

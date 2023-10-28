@@ -2,16 +2,16 @@ import React from 'react';
 import styles from './OrgProjectDropdown.module.css';
 import { useMain } from 'src/context/main.context';
 
-function OrgDropdown() {
+function ProjectDropdown() {
   // Extrai valores do contexto
-  const { selectedOrg, availableOrgs, setSelectedOrg } = useMain();
+  const { selectedProject, availableProjects, setSelectedProject } = useMain();
   
   const handleChange = (value) => {
-    // Busca a organização correspondente no array availableOrgs
-    const orgSelected = availableOrgs.find(org => org.id === value);
+    // Busca a organização correspondente no array availableProjects
+    const orgSelected = availableProjects.find(org => org.id === value);
 
-    // Passa o objeto completo para setSelectedOrg
-    setSelectedOrg(orgSelected);
+    // Passa o objeto completo para setSelectedProject
+    setSelectedProject(orgSelected);
   };
 
   return (
@@ -19,12 +19,12 @@ function OrgDropdown() {
       <select
         className={styles.dropdown}
         onChange={(e) => handleChange(e.target.value)}
-        value={selectedOrg?.id} // Usa o id da organização selecionada como valor
+        value={selectedProject?.id} // Usa o id da organização selecionada como valor
       >
         {/* Se nenhum item estiver disponível, a opção principal será "crie uma org" */}
-        {availableOrgs.map((item) => (
+        {availableProjects.map((item) => (
           <option key={item.id} value={item.id}>
-            {`ORG: ${item.name}`}
+            {`PRJ: ${item.name}`}
           </option>
         ))}
 
@@ -35,4 +35,4 @@ function OrgDropdown() {
   );
 }
 
-export default OrgDropdown;
+export default ProjectDropdown;
