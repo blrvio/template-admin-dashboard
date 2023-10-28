@@ -2,9 +2,11 @@ import React from 'react';
 import { createPopper } from '@popperjs/core';
 import { useAuth } from 'src/context/auth.context';
 import { signOut } from 'src/services/auth.service';
+import '../../services/api.service';
+import { useMain } from 'src/context/main.context';
+import OrgDropdown from './OrganizationsDropdown';
 
 const UserDropdown = () => {
-  // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const { user } = useAuth();
   const btnDropdownRef = React.createRef();
@@ -18,7 +20,17 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  console.log(user);
+
+  const handleOrgSelect = (id) => {
+    const selected = availableOrgs.find((item) => item.id === id);
+    setSelectedOrg(selected);
+  };
+
+  const {
+    setSelectedOrg,
+    availableOrgs,
+  } = useMain();
+
   return (
     <>
       <a
@@ -79,6 +91,15 @@ const UserDropdown = () => {
         >
           Gerencie sua conta
         </a>
+
+        <div className="h-0 my-2 border border-solid border-blueGray-100" />
+
+        <OrgDropdown
+          items={availableOrgs}
+          onSelect={(orgData) => handleOrgSelect(orgData)}
+          defaultLabel="Selecione uma Org"
+        />
+
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
         <button
           className={

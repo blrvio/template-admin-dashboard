@@ -10,7 +10,7 @@ import {
   FacebookAuthProvider,
 } from 'firebase/auth';
 
-const auth = getAuth(firebase_app);
+export const auth = getAuth(firebase_app);
 
 export async function signUp(email, password) {
   let result = null,
