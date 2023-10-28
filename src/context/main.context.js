@@ -1,10 +1,5 @@
-// import React from 'react';
-
-// export const MainContextProvider = MainContext.Provider;
-// export const MainContextConsumer = MainContext.Consumer;
-// export default MainContext;
-// context/auth.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useAuth } from './auth.context';
 import apiRequest from 'src/services/api.service';
 
@@ -18,13 +13,34 @@ export const MainProvider = ({ children }) => {
 
   const { user } = useAuth();
 
-  useEffect(() => {
-    console.log('useEffect triggered. User:', user);
+  const router = useRouter();
+  const projectIdFromUrl = router.query.project;
+  const orgIdFromUrl = router.query.org;
 
+  useEffect(() => {
+    if (projectIdFromUrl && availableProjects.length > 0) {
+      const foundProject = availableProjects.find(
+        (proj) => proj.id === projectIdFromUrl,
+      );
+      if (foundProject) {
+        setSelectedProject(foundProject);
+      }
+    }
+  }, [projectIdFromUrl, availableProjects]);
+
+  useEffect(() => {
+    if (orgIdFromUrl && availableOrgs.length > 0) {
+      const foundOrg = availableOrgs.find((org) => org.id === orgIdFromUrl);
+      if (foundOrg) {
+        setSelectedOrg(foundOrg);
+      }
+    }
+  }, [orgIdFromUrl, availableOrgs]);
+
+  useEffect(() => {
     const fetchOrgs = async () => {
       try {
         const orgsData = await apiRequest('/orgs');
-        // 2. Atualize o estado orgProjectItems com os dados da API
         const items = orgsData.map((org) => ({
           name: org.name,
           id: org.id,
@@ -32,37 +48,68 @@ export const MainProvider = ({ children }) => {
           thumbnail: org.thumbnail_url,
         }));
         setAvailableOrgs(items);
-
-        setSelectedOrg(items[0]);
+        if (!selectedOrg && items.length > 0) {
+          setSelectedOrg(items[0]);
+        }
       } catch (error) {
         console.error('Erro ao buscar os dados da API', error);
       }
     };
-
     fetchOrgs();
   }, [user]);
 
-   useEffect(() => {
-    console.log('useEffect triggered. User:', user);
-
-    const fetchProject = async () => {
+  useEffect(() => {
+    if (!selectedOrg) return;
+    const fetchProjects = async () => {
       try {
-        const projectsData = await apiRequest(
-          `/orgs/${selectedOrg.id}/projects`,
-        );
-        // 2. Atualize o estado orgProjectItems com os dados da API
-
-        console.log('Projects:', projectsData);
-
+        const projectsData = await apiRequest(`/orgs/${selectedOrg.id}/projects`);
         setAvailableProjects(projectsData);
 
-        setSelectedProject(projectsData[0]);
+        // Se não há projetos, defina selectedProject como null e remova da URL
+        if (projectsData.length === 0) {
+          setSelectedProject(null);
+          const { project, ...restQuery } = router.query;
+          router.push({
+            pathname: router.pathname,
+            query: restQuery,
+          }, undefined, { shallow: true });
+          return;
+        }
+
+        if (!selectedProject && projectsData.length > 0) {
+          setSelectedProject(projectsData[0]);
+        }
       } catch (error) {
         console.error('Erro ao buscar os dados da API', error);
       }
     };
+    fetchProjects();
+  }, [selectedOrg]);
 
-    fetchProject();
+  useEffect(() => {
+    if (selectedProject) {
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, project: selectedProject.id },
+        },
+        undefined,
+        { shallow: true },
+      );
+    }
+  }, [selectedProject]);
+
+  useEffect(() => {
+    if (selectedOrg) {
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, org: selectedOrg.id },
+        },
+        undefined,
+        { shallow: true },
+      );
+    }
   }, [selectedOrg]);
 
   return (
@@ -86,3 +133,5 @@ export const MainProvider = ({ children }) => {
 export const useMain = () => {
   return useContext(MainContext);
 };
+
+export default MainContext;
