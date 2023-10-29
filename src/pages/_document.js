@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
           <link rel="shortcut icon" href="/img/brand/favicon.ico" />
           <link
             rel="apple-touch-icon"

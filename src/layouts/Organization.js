@@ -4,11 +4,12 @@ import AdminNavbar from 'src/components/Navbars/AdminNavbar.js';
 import Sidebar from 'src/components/Sidebar/Sidebar.js';
 import HeaderStats from 'src/components/Headers/HeaderStats.js';
 import FooterAdmin from 'src/components/Footers/FooterAdmin.js';
+import { MainProvider } from 'src/context/main.context';
 
 export default function Organization({ children }) {
   return (
     <>
-      {/* <MainProvider> */}
+      <MainProvider>
         <Sidebar />
         <div className="relative md:ml-64 bg-blueGray-100">
           <AdminNavbar />
@@ -17,7 +18,7 @@ export default function Organization({ children }) {
             <FooterAdmin />
           </div>
         </div>
-      {/* </MainProvider> */}
+      </MainProvider>
     </>
   );
 }
