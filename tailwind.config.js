@@ -4,7 +4,13 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   purge: {
     enabled: true,
-    content: ['./**/*.html', './*.html', './**/*.js', './*.js'],
+    content: [
+      './**/*.html',
+      './*.html',
+      './**/*.js',
+      './*.js',
+      './node_modules/flowbite/**/*.js',
+    ],
     options: {
       safelist: [],
     },
@@ -88,6 +94,7 @@ module.exports = {
   ],
   plugins: [
     require('@tailwindcss/forms'),
+    require('flowbite/plugin'),
     plugin(function ({ addComponents, theme }) {
       const screens = theme('screens', {});
       addComponents([
