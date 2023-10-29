@@ -7,29 +7,37 @@ function ProjectDropdown() {
   const { selectedProject, availableProjects, setSelectedProject } = useMain();
   
   const handleChange = (value) => {
-    // Busca a organização correspondente no array availableProjects
-    const orgSelected = availableProjects.find(org => org.id === value);
+    if (value === 'createProject') {
+      // Aqui você pode redirecionar o usuário para a página de criação de projeto ou qualquer outra ação necessária
+      console.log("Criar projeto");
+      return;
+    }
+
+    // Busca o projeto correspondente no array availableProjects
+    const projectSelected = availableProjects.find(project => project.id === value);
 
     // Passa o objeto completo para setSelectedProject
-    setSelectedProject(orgSelected);
+    setSelectedProject(projectSelected);
   };
+
+  if (!availableProjects || availableProjects.length === 0) {
+    return <button onClick={() => console.log("Criar projeto")}>Criar projeto</button>;
+  }
 
   return (
     <div className={styles.dropdownContainer}>
       <select
         className={styles.dropdown}
         onChange={(e) => handleChange(e.target.value)}
-        value={selectedProject?.id} // Usa o id da organização selecionada como valor
+        value={selectedProject?.id} // Usa o id do projeto selecionado como valor
       >
-        {/* Se nenhum item estiver disponível, a opção principal será "crie uma org" */}
         {availableProjects.map((item) => (
           <option key={item.id} value={item.id}>
             {`PRJ: ${item.name}`}
           </option>
         ))}
-
-        {/* Adicione a opção "crie uma org" ao final da lista */}
-        <option value="createOrg">crie uma org</option>
+        
+        <option value="createProject">crie um projeto</option>
       </select>
     </div>
   );

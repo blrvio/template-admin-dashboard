@@ -10,6 +10,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/tailwind.css';
 import { main_config, metadata_config } from 'src/common/app_config';
 import { AuthProvider } from 'src/context/auth.context';
+import { MainProvider } from 'src/context/main.context';
 
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`);
@@ -49,6 +50,7 @@ export default class MyApp extends App {
 
     return (
       <AuthProvider>
+        <MainProvider>
         <React.Fragment>
           <Head>
             <meta
@@ -64,6 +66,7 @@ export default class MyApp extends App {
             <Component {...pageProps} />
           </Layout>
         </React.Fragment>
+        </MainProvider>
       </AuthProvider>
     );
   }

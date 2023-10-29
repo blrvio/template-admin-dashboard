@@ -38,12 +38,64 @@ export default function Sidebar() {
       </li>
     );
   };
+
   if (!selectedOrg) {
-    return <>carregando</>;
-} else if (!selectedProject) {
-    return <>sem projetos disponíveis</>;
-} else {
-    console.log('selectedOrg:', selectedProject);
+    return (
+      <>
+        <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+          <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
+            {/* Toggler */}
+            <button
+              className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+              type="button"
+              onClick={() => setCollapseShow('bg-white m-2 py-3 px-6')}
+            >
+              <i className="fas fa-bars"></i>
+            </button>
+            {/* Brand */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <i className="fa fa-spinner fa-spin"></i>
+            </div>
+          </div>
+        </nav>
+      </>
+    );
+  } else if (!selectedProject) {
+    return (
+      <>
+        <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+          <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
+            {/* Toggler */}
+            <button
+              className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+              type="button"
+              onClick={() => setCollapseShow('bg-white m-2 py-3 px-6')}
+            >
+              <i className="fas fa-bars"></i>
+            </button>
+            {/* Brand */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <i className="fa fa-spinner fa-spin"></i>
+            </div>
+          </div>
+        </nav>
+      </>
+    );
+  } else {
     return (
       <>
         <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -65,7 +117,7 @@ export default function Sidebar() {
                 {main_config.app_name}
               </a>
             </Link>
-  
+
             {/* User */}
             <ul className="md:hidden items-center flex flex-wrap list-none">
               <li className="inline-block relative">
@@ -112,20 +164,22 @@ export default function Sidebar() {
                   <input
                     type="text"
                     placeholder="Search"
-                    className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
+                    className=" px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
                   />
                 </div>
               </form>
-  
+
               <hr className="my-4 md:min-w-full" />
               {/* Heading */}
               <ul>
-              <li className="items-center">
-              {`ORG: ${selectedOrg.name}`}
-              </li>
-              <li className="items-center">
-  {`PROJ: ${selectedProject.name ? selectedProject.name : 'Nenhum projeto selecionado'}`}
-  </li>
+                <li className="items-center">{`ORG: ${selectedOrg.name}`}</li>
+                <li className="items-center">
+                  {`PROJ: ${
+                    selectedProject.name
+                      ? selectedProject.name
+                      : 'Nenhum projeto selecionado'
+                  }`}
+                </li>
               </ul>
               {/* Divider */}
               <hr className="my-4 md:min-w-full" />
@@ -134,7 +188,7 @@ export default function Sidebar() {
                 Frente de caixa
               </h6>
               {/* Navigation */}
-  
+
               <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                 <li className="items-center">
                   <NavigationLink
@@ -165,7 +219,7 @@ export default function Sidebar() {
                   />
                 </li>
               </ul>
-  
+
               {/* Divider */}
               <hr className="my-4 md:min-w-full" />
               {/* Heading */}
@@ -173,7 +227,7 @@ export default function Sidebar() {
                 Admin Layout Pages
               </h6>
               {/* Navigation */}
-  
+
               <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                 <li className="items-center">
                   <Link href="/admin/dashboard">
@@ -198,7 +252,7 @@ export default function Sidebar() {
                     </a>
                   </Link>
                 </li>
-  
+
                 <li className="items-center">
                   <Link href="/admin/settings">
                     <a
@@ -222,7 +276,7 @@ export default function Sidebar() {
                     </a>
                   </Link>
                 </li>
-  
+
                 <li className="items-center">
                   <Link href="/admin/tables">
                     <a
@@ -246,7 +300,7 @@ export default function Sidebar() {
                     </a>
                   </Link>
                 </li>
-  
+
                 <li className="items-center">
                   <Link href="/admin/maps">
                     <a
@@ -271,7 +325,7 @@ export default function Sidebar() {
                   </Link>
                 </li>
               </ul>
-  
+
               {/* Divider */}
               <hr className="my-4 md:min-w-full" />
               {/* Heading */}
@@ -284,17 +338,19 @@ export default function Sidebar() {
                   <a
                     href="https://docs.blackravine.com/business-cloud/getting-started"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                   >
                     <i className="fas fa-graduation-cap mr-2 text-blueGray-300 text-base"></i>
                     Learning Center
                   </a>
                 </li>
-  
+
                 <li className="inline-flex">
                   <a
                     href="https://docs.blackravine.com/business-cloud/getting-started"
                     target="_blank"
+                    rel="noreferrer"
                     className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                   >
                     <i className="fas fa-plus-square mr-2 text-blueGray-300 text-base"></i>
@@ -307,7 +363,5 @@ export default function Sidebar() {
         </nav>
       </>
     );
-}
-
-
+  }
 }
