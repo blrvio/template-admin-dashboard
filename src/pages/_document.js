@@ -16,7 +16,7 @@ class MyDocument extends Document {
             href="/img/brand/apple-icon.png"
           />
         </Head>
-        <body className="text-blueGray-700 antialiased">
+        <body className="text-slate-700 antialiased">
           <div id="modal-root"></div>
           <div id="page-transition"></div>
           <Main />

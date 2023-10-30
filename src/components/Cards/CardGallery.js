@@ -13,7 +13,7 @@ function CardGallery({ cardsData }) {
         </div>
       ))}
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4 mt-4 mb-4">
-          <CardProject create/>
+          <CardProject create onClick={(e) => console.log(e)}/>
 
         </div>
     </div>

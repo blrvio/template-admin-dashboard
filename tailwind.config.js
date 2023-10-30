@@ -1,28 +1,18 @@
+/** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
-const colors = require('tailwindcss/colors');
-
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: {
-    enabled: true,
-    content: [
-      './**/*.html',
-      './*.html',
-      './**/*.js',
-      './*.js',
-      './node_modules/flowbite/**/*.js',
-      "./node_modules/flowbite-react/**/*.js",
-
-    ],
-    options: {
-      safelist: [],
-    },
-  },
+  content: [
+    './**/*.html',
+    './*.html',
+    './**/*.js',
+    './*.js',
+    './node_modules/flowbite/**/*.js',
+    "./node_modules/flowbite-react/**/*.js",
+    // ... outros caminhos de conteúdo se houver
+  ],
   theme: {
-    colors: {
-      ...colors,
-    },
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],

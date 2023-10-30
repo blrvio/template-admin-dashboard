@@ -22,14 +22,14 @@ export default function Sidebar() {
           className={
             'text-xs uppercase py-3 font-bold block ' +
             (isActive
-              ? 'text-lightBlue-500 hover:text-lightBlue-600'
-              : 'text-blueGray-700 hover:text-blueGray-500')
+              ? 'text-sky-500 hover:text-sky-600'
+              : 'text-slate-700 hover:text-slate-500')
           }>
 
           <i
             className={
               `${iconClass} mr-2 text-sm ` +
-              (isActive ? 'opacity-75' : 'text-blueGray-300')
+              (isActive ? 'opacity-75' : 'text-slate-300')
             }
           ></i>
           {label}
@@ -110,7 +110,7 @@ export default function Sidebar() {
           {/* Brand */}
           <Link
             href="/"
-            className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
+            className="md:block text-left md:pb-2 text-slate-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
 
             {main_config.app_name}
 
@@ -133,12 +133,12 @@ export default function Sidebar() {
             }
           >
             {/* Collapse header */}
-            <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
+            <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-slate-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link
                     href="/"
-                    className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
+                    className="md:block text-left md:pb-2 text-slate-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
 
                     {main_config.app_name}
 
@@ -161,7 +161,7 @@ export default function Sidebar() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className=" px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
+                  className=" px-3 py-2 h-12 border border-solid  border-slate-500 placeholder-slate-300 text-slate-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
                 />
               </div>
             </form>
@@ -181,7 +181,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            <h6 className="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Frente de caixa
             </h6>
             {/* Navigation */}
@@ -212,7 +212,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            <h6 className="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Admin Layout Pages
             </h6>
             {/* Navigation */}
@@ -224,8 +224,8 @@ export default function Sidebar() {
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
                     (router.pathname.indexOf('/admin/dashboard') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
+                      ? 'text-sky-500 hover:text-sky-600'
+                      : 'text-slate-700 hover:text-slate-500')
                   }>
 
                   <i
@@ -233,7 +233,7 @@ export default function Sidebar() {
                       'fas fa-tv mr-2 text-sm ' +
                       (router.pathname.indexOf('/admin/dashboard') !== -1
                         ? 'opacity-75'
-                        : 'text-blueGray-300')
+                        : 'text-slate-300')
                     }
                   ></i>{' '}Dashboard
                 </Link>
@@ -245,8 +245,8 @@ export default function Sidebar() {
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
                     (router.pathname.indexOf('/admin/settings') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
+                      ? 'text-sky-500 hover:text-sky-600'
+                      : 'text-slate-700 hover:text-slate-500')
                   }>
 
                   <i
@@ -254,7 +254,7 @@ export default function Sidebar() {
                       'fas fa-tools mr-2 text-sm ' +
                       (router.pathname.indexOf('/admin/settings') !== -1
                         ? 'opacity-75'
-                        : 'text-blueGray-300')
+                        : 'text-slate-300')
                     }
                   ></i>{' '}Settings
                 </Link>
@@ -266,8 +266,8 @@ export default function Sidebar() {
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
                     (router.pathname.indexOf('/admin/tables') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
+                      ? 'text-sky-500 hover:text-sky-600'
+                      : 'text-slate-700 hover:text-slate-500')
                   }>
 
                   <i
@@ -275,7 +275,7 @@ export default function Sidebar() {
                       'fas fa-table mr-2 text-sm ' +
                       (router.pathname.indexOf('/admin/tables') !== -1
                         ? 'opacity-75'
-                        : 'text-blueGray-300')
+                        : 'text-slate-300')
                     }
                   ></i>{' '}Tables
                 </Link>
@@ -287,8 +287,8 @@ export default function Sidebar() {
                   className={
                     'text-xs uppercase py-3 font-bold block ' +
                     (router.pathname.indexOf('/admin/maps') !== -1
-                      ? 'text-lightBlue-500 hover:text-lightBlue-600'
-                      : 'text-blueGray-700 hover:text-blueGray-500')
+                      ? 'text-sky-500 hover:text-sky-600'
+                      : 'text-slate-700 hover:text-slate-500')
                   }>
 
                   <i
@@ -296,7 +296,7 @@ export default function Sidebar() {
                       'fas fa-map-marked mr-2 text-sm ' +
                       (router.pathname.indexOf('/admin/maps') !== -1
                         ? 'opacity-75'
-                        : 'text-blueGray-300')
+                        : 'text-slate-300')
                     }
                   ></i>{' '}Maps
                 </Link>
@@ -306,7 +306,7 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            <h6 className="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Documentation
             </h6>
             {/* Navigation */}
@@ -316,9 +316,9 @@ export default function Sidebar() {
                   href="https://docs.blackravine.com/business-cloud/getting-started"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
+                  className="text-slate-700 hover:text-slate-500 text-sm block mb-4 no-underline font-semibold"
                 >
-                  <i className="fas fa-graduation-cap mr-2 text-blueGray-300 text-base"></i>
+                  <i className="fas fa-graduation-cap mr-2 text-slate-300 text-base"></i>
                   Learning Center
                 </a>
               </li>
@@ -328,9 +328,9 @@ export default function Sidebar() {
                   href="https://docs.blackravine.com/business-cloud/getting-started"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
+                  className="text-slate-700 hover:text-slate-500 text-sm block mb-4 no-underline font-semibold"
                 >
-                  <i className="fas fa-plus-square mr-2 text-blueGray-300 text-base"></i>
+                  <i className="fas fa-plus-square mr-2 text-slate-300 text-base"></i>
                   Submeta uma feature
                 </a>
               </li>

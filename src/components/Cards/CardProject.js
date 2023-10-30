@@ -1,32 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function CardProject({ name, icon, resourceCount, create }) {
+export default function CardProject({
+  name,
+  icon,
+  resourceCount,
+  create,
+  onClick,
+}) {
   if (create) {
     return (
-
-
-
-<a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-</a>
-
-
-
-
+      <div
+        className="relative flex flex-col teste h-24  justify-center items-center min-w-0 break-words bg-orange-600 rounded mb-6 xl:mb-0 shadow-lg h-48"
+        onClick={onClick}
+      >
+        <div className="flex-auto flex flex-wrap justify-center items-center h-full">
+          <span className="font-semibold text-xl text-slate-700 mr-2">
+            Criar projeto
+          </span>
+          <i className="fas fa-plus text-slate-700"></i>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-48">
+    <div
+      className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-48"
+      onClick={onClick}
+    >
       <div className="flex-auto p-4">
         <div className="flex flex-wrap">
           <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-            <h5 className="text-blueGray-400 uppercase font-bold text-xs">
+            <h5 className="text-slate-400 uppercase font-bold text-xs">
               Project
             </h5>
-            <span className="font-semibold text-xl text-blueGray-700">
+            <span className="font-semibold text-xl text-slate-700">
               {name}
             </span>
           </div>
@@ -36,7 +45,7 @@ export default function CardProject({ name, icon, resourceCount, create }) {
             </div>
           </div>
         </div>
-        <p className="text-sm text-blueGray-400 mt-4">
+        <p className="text-sm text-slate-400 mt-4">
           Resources: {resourceCount}
         </p>
       </div>
@@ -45,15 +54,17 @@ export default function CardProject({ name, icon, resourceCount, create }) {
 }
 
 CardProject.defaultProps = {
-  title: '',
-  icon: 'fas fa-folder-open', // Default project icon
+  name: '', // Corrigi o nome da prop, antes era 'title'
+  icon: 'fas fa-folder-open',
   resourceCount: '0',
   create: false,
+  onClick: () => {}, // Função vazia por padrão
 };
 
 CardProject.propTypes = {
-  title: PropTypes.string,
+  name: PropTypes.string, // Corrigi o nome da prop, antes era 'title'
   icon: PropTypes.string,
   resourceCount: PropTypes.string,
   create: PropTypes.bool,
+  onClick: PropTypes.func, // Adicionado ao PropTypes
 };
