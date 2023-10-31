@@ -32,8 +32,6 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
       }
 
       return data;
-    } else {
-      console.error('Nenhum usuário está autenticado');
     }
   } catch (error) {
     console.error('Erro ao fazer a requisição:', error);

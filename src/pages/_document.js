@@ -1,5 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 class MyDocument extends Document {
   render() {
@@ -15,6 +16,8 @@ class MyDocument extends Document {
             sizes="76x76"
             href="/img/brand/apple-icon.png"
           />
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
+
         </Head>
         <body className="text-slate-700 antialiased">
           <div id="modal-root"></div>
@@ -22,6 +25,8 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.js"></Script>
+        
       </Html>
     );
   }

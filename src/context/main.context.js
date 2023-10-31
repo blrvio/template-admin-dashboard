@@ -41,12 +41,13 @@ export const MainProvider = ({ children }) => {
     const fetchOrgs = async () => {
       try {
         const orgsData = await apiRequest('/orgs');
-        const items = orgsData.map((org) => ({
+        const items = orgsData ? orgsData.map((org) => ({
           name: org.name,
           id: org.id,
           description: org.description,
           thumbnail: org.thumbnail_url,
-        }));
+        })) : [];
+        
         setAvailableOrgs(items);
 
         const storedOrgId = localStorage.getItem('selectedOrgId');

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function CardProject({
@@ -8,25 +8,42 @@ export default function CardProject({
   create,
   onClick,
 }) {
+
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handleMouseDown = () => {
+    setIsPressed(true);
+    onClick();
+  };
+
+  const handleMouseUp = () => {
+    setIsPressed(false);
+  };
   if (create) {
     return (
-      <div
-        className="relative flex flex-col teste h-24  justify-center items-center min-w-0 break-words bg-orange-600 rounded mb-6 xl:mb-0 shadow-lg h-48"
-        onClick={onClick}
-      >
-        <div className="flex-auto flex flex-wrap justify-center items-center h-full">
-          <span className="font-semibold text-xl text-slate-700 mr-2">
-            Criar projeto
-          </span>
-          <i className="fas fa-plus text-slate-700"></i>
-        </div>
+<div
+      className={`relative flex flex-col justify-center items-center min-w-0 break-words bg-neutral-400 hover:bg-neutral-600 rounded mb-6 xl:mb-0 shadow-lg h-48 transition-transform transform ${isPressed ? 'scale-95' : ''}`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}  // Resetar o estado se o mouse sair enquanto estiver pressionado
+      onClick={onClick}
+    >
+      <div className="flex-auto flex flex-wrap justify-center items-center h-full">
+        <span className="font-semibold text-xl text-slate-700 mr-2">
+          Criar projeto
+        </span>
+        <i className="fas fa-plus text-slate-700"></i>
       </div>
+    </div>
     );
   }
 
   return (
     <div
-      className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-48"
+      className={`relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-48 transition-transform transform ${isPressed ? 'scale-95' : ''}`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}  // Resetar o estado se o mouse sair enquanto estiver pressionado
       onClick={onClick}
     >
       <div className="flex-auto p-4">
@@ -40,7 +57,7 @@ export default function CardProject({
             </span>
           </div>
           <div className="relative w-auto pl-4 flex-initial">
-            <div className="text-blue p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
+            <div className="text-blue p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-white-500">
               <i className={icon}></i>
             </div>
           </div>

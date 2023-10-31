@@ -10,6 +10,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/index.css';
 import { main_config, metadata_config } from 'src/common/app_config';
 import { AuthProvider } from 'src/context/auth.context';
+import CreateProjectModal from 'src/components/Modal/CreateProjectModal';
 
 let root;
 
@@ -63,6 +64,7 @@ export default class MyApp extends App {
           </Head>
           <Layout>
             <Component {...pageProps} />
+            <CreateProjectModal/>
           </Layout>
         </React.Fragment>
       </AuthProvider>

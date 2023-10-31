@@ -1,15 +1,18 @@
-/** @type {import('tailwindcss').Config} */
+// /** @type {import('tailwindcss').Config} */
+/**
+ * @type {import('@types/tailwindcss/tailwind-config').TailwindConfig}
+ */
 const plugin = require('tailwindcss/plugin');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  mode: 'jit',
+  purge: ['./src/**/*.{js,ts,jsx,tsx}', './public/index.html'],
   content: [
-    './**/*.html',
-    './*.html',
-    './**/*.js',
-    './*.js',
-    './node_modules/flowbite/**/*.js',
+    "./node_modules/flowbite/**/*.js",
     "./node_modules/flowbite-react/**/*.js",
+    "./public/**/*.html",
+    "./src/**/*.{ts,tsx}",
     // ... outros caminhos de conteúdo se houver
   ],
   theme: {
