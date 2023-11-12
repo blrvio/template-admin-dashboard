@@ -3,14 +3,13 @@ import React from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useState } from "react";
 import { forgot } from "@/src/services/auth.service";
-import { useRouter } from "next/router";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleEmailChange = (e: { target: { value: React.SetStateAction<string>; }; }) => setEmail(e.target.value);
 
   const handleForgot = async () => {
     setIsLoading(true);
@@ -45,7 +44,7 @@ export default function LoginPage() {
             label="Email"
             placeholder="Enter email"
             isInvalid={isEmailInvalid}
-            color={isEmailInvalid ? "danger" : ""}
+            color={isEmailInvalid ? "danger" : "default"}
             errorMessage={isEmailInvalid && "Please enter a valid email"}
             radius="sm"
             onChange={handleEmailChange}

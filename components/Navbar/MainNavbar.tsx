@@ -98,7 +98,7 @@ export const MainNavbar = () => {
               color="secondary"
               name="Jason Hughes"
               size="sm"
-              src={user?.photoURL}
+              src={user?.photoURL!}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">

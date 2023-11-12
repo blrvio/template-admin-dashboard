@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { forwardRef } from "react";
 
-export const DeleteIcon = forwardRef((props, ref) => (
+export const DeleteIcon = forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     ref={ref}
     aria-hidden="true"

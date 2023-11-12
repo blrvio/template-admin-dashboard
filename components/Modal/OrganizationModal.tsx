@@ -26,8 +26,8 @@ export const OrganizationModal = () => {
         size={"sm"}
         label="Select an project"
         className="max-w-xs"
-        onClick={onOpen}
-      ></Select>
+        onClick={onOpen}>
+        </Select>
       <Modal
         isOpen={isOpen}
         backdrop="blur"

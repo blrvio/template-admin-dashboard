@@ -1,28 +1,33 @@
 import { auth } from "./auth.service";
 
-// const BASE_URL = 'http://api-dev.internal.blrv.io'; // Altere isso para o URL base da sua API.
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL //"http://localhost:3000"; // Altere isso para o URL base da sua API.
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // Use a variável de ambiente para o URL base
 
-async function apiRequest(endpoint: string, method = "GET", body = null) {
+interface Config {
+  method: string;
+  headers: {
+    "Content-Type": string;
+    Authorization: string;
+  };
+  body?: string; // A propriedade body é opcional e do tipo string
+}
+
+async function apiRequest(endpoint: string, method: string = "GET", body: any = null) {
   try {
     if (auth.currentUser) {
-      // Obter o token JWT do usuário.
       const token = await auth.currentUser.getIdToken(true);
-      console.log("token", token);
-      
-      // const token = "ok google"
+
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       };
 
-      const config = {
+      const config: Config = { // Defina o objeto com o tipo Config
         method,
         headers,
       };
 
       if (body) {
-        config.body = JSON.stringify(body);
+        config.body = JSON.stringify(body); // O TypeScript agora entende que body é uma string
       }
 
       const response = await fetch(`${BASE_URL}${endpoint}`, config);

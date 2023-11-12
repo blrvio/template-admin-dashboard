@@ -26,57 +26,65 @@ export const CreateOrgModal = () => {
   };
 
   // Esta função lida com o evento onChange do input de arquivo
-  const handleProjectFileChange = (event) => {
-    const file = event.target.files[0]; // Pegar o arquivo
-    if (!file) return;
-
-    // Aqui você pode implementar a lógica de upload do arquivo
-    // Por exemplo, utilizando a API `fetch` para enviar o arquivo para o servidor
+// Esta função lida com o evento onChange do input de arquivo
+const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  if (event.target.files && event.target.files.length > 0) {
+    const file = event.target.files[0];
+    // Preparar um FormData com o arquivo para upload
     const formData = new FormData();
     formData.append("file", file);
 
+    // Fazer a requisição para o endpoint de upload
     fetch("/api/upload", {
-      // Substitua '/api/upload' pelo endpoint correto
       method: "POST",
       body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Arquivo enviado com sucesso:", data);
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar o arquivo:", error);
-      });
-  };
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Arquivo enviado com sucesso:", data);
+    })
+    .catch((error) => {
+      console.error("Erro ao enviar o arquivo:", error);
+    });
+  }
+};
+
 
   const handleOrganizationUploadClick = () => {
     // Isto irá simular um clique no input de arquivo
     document.getElementById("fileInput-organization")?.click();
   };
 
-  // Esta função lida com o evento onChange do input de arquivo
-  const handleOrganizationFileChange = (event) => {
-    const file = event.target.files[0]; // Pegar o arquivo
-    if (!file) return;
-
-    // Aqui você pode implementar a lógica de upload do arquivo
-    // Por exemplo, utilizando a API `fetch` para enviar o arquivo para o servidor
-    const formData = new FormData();
-    formData.append("file", file);
-
-    fetch("/api/upload", {
-      // Substitua '/api/upload' pelo endpoint correto
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
+  const handleOrganizationFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0]; // Pegue o primeiro arquivo
+  
+      const formData = new FormData();
+      formData.append("file", file); // Adicione o arquivo ao objeto FormData
+  
+      // Substitua '/api/upload' pelo endpoint correto de upload da sua API
+      fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+      .then((response) => {
+        if (!response.ok) {
+          // Se a resposta não for ok, lance um novo erro com o status
+          throw new Error(`Erro ${response.status}: ${response.statusText}`);
+        }
+        return response.json(); // Converta a resposta em JSON
+      })
       .then((data) => {
         console.log("Arquivo enviado com sucesso:", data);
+        // Aqui você pode implementar qualquer lógica adicional após o sucesso do upload
       })
       .catch((error) => {
         console.error("Erro ao enviar o arquivo:", error);
+        // Tratamento adicional de erros pode ser feito aqui
       });
+    }
   };
+  
 
   const { organizations, addOrganization, currentSelectedOrganization } = useOrganizations();
 
@@ -90,14 +98,14 @@ export const CreateOrgModal = () => {
   );
 
   // Handlers para atualizar os estados conforme os campos são preenchidos
-  const handleProjectNameChange = (e) => setProjectName(e.target.value);
-  const handleProjectDescriptionChange = (e) =>
+  const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setProjectName(e.target.value);
+  const handleProjectDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setProjectDescription(e.target.value);
-  const handleOrganizationNameChange = (e) =>
+  const handleOrganizationNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setOrganizationName(e.target.value);
-  const handleOrganizationDescriptionChange = (e) =>
+  const handleOrganizationDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setOrganizationDescription(e.target.value);
-  const handleOrganizationChange = (value) => setSelectedOrganization(value);
+  const handleOrganizationChange = (value: React.ChangeEvent<HTMLSelectElement>) => setSelectedOrganization(value);
 
 
   const handleCreateProject = async () => {
@@ -151,7 +159,7 @@ export const CreateOrgModal = () => {
                   size="md"
                   aria-label="Tabs form"
                   selectedKey={selected}
-                  onSelectionChange={setSelected}
+                  onSelectionChange={(key) => setSelected(String(key))}
                 >
                   <Tab key="project" title="Project">
                     <form className="flex flex-col items-center gap-4">

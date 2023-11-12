@@ -46,7 +46,11 @@ const OrganizationsContext = createContext<OrganizationsContextType>({
   deleteProject: () => {},
 });
 
-export const OrganizationsProvider: React.FC = ({ children }) => {
+interface OrganizationsProviderProps {
+  children: React.ReactNode;
+}
+
+export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ children }) => {
   const { user } = useAuth();
   const [organizations, setOrganizations] = useState<any[]>([]);
   const [projects, setProjects] = useState<any[]>([]);

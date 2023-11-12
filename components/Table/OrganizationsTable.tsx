@@ -25,16 +25,16 @@ const organizationStatusColor = {
 export const OrganizationsTable = () => {
   const { organizations, deleteOrg, editOrg } = useOrganizations();
 
-  const handleEdit = (id) => {
+  const handleEdit = (id:string) => {
     // Lógica para abrir o modal de edição com os dados da organização
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id:string) => {
     // Confirmação de exclusão e chamada da função de contexto para excluir
     deleteOrg(id);
   };
 
-  const renderOrganizationCell = useCallback((organization, key) => {
+  const renderOrganizationCell = useCallback((organization: any, key: any) => {
     const value = organization[key];
 
     switch (key) {
@@ -63,7 +63,7 @@ export const OrganizationsTable = () => {
         return (
           <Chip
             className="capitalize"
-            color={organizationStatusColor[organization.status] || "default"}
+            color={"default"}
             size="sm"
             variant="flat"
           >

@@ -1,7 +1,7 @@
 import apiRequest from "../services/api.service";
 
 // Função para buscar projetos de uma organização
-async function getProjects(orgId) {
+async function getProjects(orgId: string) {
   const endpoint = `/orgs/${orgId}/projects`;
   try {
     const projects = await apiRequest(endpoint);
@@ -13,7 +13,7 @@ async function getProjects(orgId) {
 }
 
 // Função para criar um novo projeto em uma organização
-async function createProject(orgId, data) {
+async function createProject(orgId: string, data:any) {
   const endpoint = `/orgs/${orgId}/projects`;
   try {
     const newProject = await apiRequest(endpoint, "POST", data);
@@ -25,7 +25,7 @@ async function createProject(orgId, data) {
 }
 
 // Função para editar um projeto existente
-async function editProject(orgId, projectId, data) {
+async function editProject(orgId: string, projectId: string, data:any) {
   const endpoint = `/orgs/${orgId}/projects/${projectId}`;
   try {
     const updatedProject = await apiRequest(endpoint, "PATCH", data);
@@ -37,7 +37,7 @@ async function editProject(orgId, projectId, data) {
 }
 
 // Função para deletar um projeto
-async function deleteProject(orgId, projectId) {
+async function deleteProject(orgId: string, projectId: string) {
   const endpoint = `/orgs/${orgId}/projects/${projectId}`;
   try {
     await apiRequest(endpoint, "DELETE");

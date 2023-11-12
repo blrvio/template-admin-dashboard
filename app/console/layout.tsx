@@ -1,8 +1,14 @@
 import Sidebar from "@/components/Sidebar/MainSidebar";
 import { MainNavbar } from "@/components/Navbar/MainNavbar";
 import ProtectRoute from "@/components/ProtectRoute";
+import React, { ReactNode } from 'react';
 
-export default function AdminLayout({ children }) {
+
+interface AdminLayoutProps {
+  children: ReactNode;
+}
+
+export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <>
       <ProtectRoute>

@@ -14,7 +14,7 @@ const organizationStatusColor = {
 export const OrganizationsTable = () => {
   const { organizations } = useOrganizations();
 
-  const renderOrganizationCell = useCallback((organization, key) => {
+  const renderOrganizationCell = useCallback((organization: any, key: any) => {
     const value = organization[key];
 
     switch (key) {
@@ -38,7 +38,7 @@ export const OrganizationsTable = () => {
         return (
           <Chip
             className="capitalize"
-            color={organizationStatusColor[organization.status] || "default"}
+            color={"default"}
             size="sm"
             variant="flat"
           >

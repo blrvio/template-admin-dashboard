@@ -1,5 +1,5 @@
-import React from "react";
-export const EyeFilledIcon = (props) => (
+import React, { SVGAttributes } from "react";
+export const EyeFilledIcon = (props: SVGAttributes<SVGSVGElement>) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -8,7 +8,6 @@ export const EyeFilledIcon = (props) => (
     role="presentation"
     viewBox="0 0 24 24"
     width="1em"
-    ref={props.ref}
     {...props}
   >
     <path

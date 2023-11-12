@@ -1,15 +1,19 @@
-// components/ProtectRoute.tsx
-"use client";
+"use client"
+import { ReactNode } from 'react';
 import { useAuth } from '@/src/contexts/auth.context';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-const ProtectRoute = ({ children }) => {
+interface ProtectRouteProps {
+  children: ReactNode;
+}
+
+const ProtectRoute = ({ children }: ProtectRouteProps) => {
   const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !loading && !user) {
+    if (!loading && !user) {
       router.push('/auth/login');
     }
   }, [user, loading, router]);
@@ -19,10 +23,11 @@ const ProtectRoute = ({ children }) => {
   }
 
   if (!user) {
-    return null; // or a placeholder while redirecting
+    // Certifique-se de retornar `null` e não `undefined`
+    return null; 
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default ProtectRoute;

@@ -16,8 +16,9 @@ import {
 } from "@nextui-org/react";
 import { useOrganizations } from "@/src/contexts/organization.context";
 import { EditIcon } from "../Icons/EditIcon";
+import { EditOrgModalProps } from "@/src/interfaces/organization.interfaces";
 
-export const EditOrgModal = ({ organization, onEdit }) => {
+export const EditOrgModal = ({ organization, onEdit }: EditOrgModalProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const { editOrg } = useOrganizations();
@@ -29,9 +30,9 @@ export const EditOrgModal = ({ organization, onEdit }) => {
   );
 
   // Handlers para atualizar os estados conforme os campos são preenchidos
-  const handleOrganizationNameChange = (e) =>
+  const handleOrganizationNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setOrganizationName(e.target.value);
-  const handleOrganizationDescriptionChange = (e) =>
+  const handleOrganizationDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setOrganizationDescription(e.target.value);
 
   // Handler para criar organização

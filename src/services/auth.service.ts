@@ -12,7 +12,7 @@ import {
 
 export const auth = getAuth(firebase_app);
 
-export async function signUp(email, password) {
+export async function signUp(email: string, password: string) {
   let result = null,
     error = null;
   try {
@@ -23,7 +23,7 @@ export async function signUp(email, password) {
   return { result, error };
 }
 
-export const signIn = async (email, password) => {
+export const signIn = async (email: string, password: string) => {
   let result = null,
     error = null;
   try {
@@ -44,7 +44,7 @@ export const signOut = async () => {
   return { error };
 };
 
-export const forgot = async (email) => {
+export const forgot = async (email: string) => {
   let error = null;
   try {
     await sendPasswordResetEmail(auth, email);

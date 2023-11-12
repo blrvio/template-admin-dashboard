@@ -4,6 +4,8 @@ async function getOrganizations() {
   const endpoint = "/orgs"; // Endpoint para buscar as organizações
   try {
     const organizations = await apiRequest(endpoint);
+    console.log(organizations[0]);
+    
     return organizations; // Deve ser um array de acordo com a resposta da sua API
   } catch (error) {
     console.error("Erro ao buscar organizações:", error);
@@ -11,7 +13,7 @@ async function getOrganizations() {
   }
 }
 
-async function createOrganization(data) {
+async function createOrganization(data:any) {
   const endpoint = "/orgs"; // Endpoint para criar uma organização
   try {
     const newOrganization = await apiRequest(endpoint, "POST", data);
@@ -22,7 +24,7 @@ async function createOrganization(data) {
   }
 }
 
-async function editOrganization(id, data) {
+async function editOrganization(id:string, data:any) {
   const endpoint = `/orgs/${id}`; // Endpoint para editar uma organização com seu ID
   try {
     const updatedOrganization = await apiRequest(endpoint, "PATCH", data);
@@ -33,7 +35,7 @@ async function editOrganization(id, data) {
   }
 }
 
-async function deleteOrganization(id) {
+async function deleteOrganization(id:string) {
   const endpoint = `/orgs/${id}`; // Endpoint para deletar uma organização com seu ID
   try {
     await apiRequest(endpoint, "DELETE");

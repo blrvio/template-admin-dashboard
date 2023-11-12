@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { forwardRef } from "react";
 
-export const EyeIcon = forwardRef((props, ref) => (
+export const EyeIcon = forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     aria-hidden="true"
     fill="none"
