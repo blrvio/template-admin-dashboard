@@ -1,8 +1,18 @@
 import React, { useCallback } from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
-import { EditIcon } from "../Icons/EditIcon";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  User,
+  Chip,
+  Tooltip,
+} from "@nextui-org/react";
 import { DeleteIcon } from "../Icons/DeleteIcon";
 import { EyeIcon } from "../Icons/EyeIcon";
+import { EditOrgModal } from "../Modal/EditOrgModal";
 import { useOrganizations } from "@/src/contexts/organization.context";
 
 const organizationStatusColor = {
@@ -11,8 +21,13 @@ const organizationStatusColor = {
   vacation: "warning",
 };
 
-export const OrganizationsTable = () => {
-  const { organizations } = useOrganizations();
+export const ProjectsTable = () => {
+  const { projects, deleteOrg, editOrg, deleteProject } = useOrganizations();
+
+  const handleDelete = (organizationId:string, projectId:string) => {
+    // Confirmação de exclusão e chamada da função de contexto para excluir
+    deleteProject(organizationId, projectId);
+  };
 
   const renderOrganizationCell = useCallback((organization: any, key: any) => {
     const value = organization[key];
@@ -21,7 +36,12 @@ export const OrganizationsTable = () => {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "lg", src: organization.thumbnail_url || "https://images.unsplash.com/photo-1470075801209-17f9ec0cada6" }}
+            avatarProps={{
+              radius: "lg",
+              src:
+                organization.thumbnail_url ||
+                "https://images.unsplash.com/photo-1470075801209-17f9ec0cada6",
+            }}
             name={value}
           />
         );
@@ -48,9 +68,21 @@ export const OrganizationsTable = () => {
       case "actions":
         return (
           <div className="flex items-center gap-2">
-            <Tooltip content="Details"><EyeIcon /></Tooltip>
-            <Tooltip content="Edit"><EditIcon /></Tooltip>
-            <Tooltip content="Delete"><DeleteIcon /></Tooltip>
+            <Tooltip content="Details">
+              <EyeIcon />
+            </Tooltip>
+            <Tooltip content="Edit user">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+              <EditOrgModal organization={organization} onEdit={editOrg} />
+              </span>
+            </Tooltip>
+            <Tooltip content="Delete" color="danger">
+              <div onClick={() => handleDelete(organization.resource_data.org_id, organization.id)}>
+                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                  <DeleteIcon />
+                </span>
+              </div>
+            </Tooltip>
           </div>
         );
       default:
@@ -65,19 +97,27 @@ export const OrganizationsTable = () => {
   ];
 
   return (
-    <Table aria-label="Example table with custom cells" className="min-w-[200px] min-h-[300px]">
+    <Table
+      aria-label="Example table with custom cells"
+      className="min-w-[200px] min-h-[300px]"
+    >
       <TableHeader>
-        {tableColumns.map(column => (
-          <TableColumn key={column.key} align={column.key === "actions" ? "center" : "start"}>
+        {tableColumns.map((column) => (
+          <TableColumn
+            key={column.key}
+            align={column.key === "actions" ? "center" : "start"}
+          >
             {column.name}
           </TableColumn>
         ))}
       </TableHeader>
       <TableBody>
-        {organizations.map(organization => (
+        {projects.map((organization) => (
           <TableRow key={organization.id}>
-            {tableColumns.map(column => (
-              <TableCell key={column.key}>{renderOrganizationCell(organization, column.key)}</TableCell>
+            {tableColumns.map((column) => (
+              <TableCell key={column.key}>
+                {renderOrganizationCell(organization, column.key)}
+              </TableCell>
             ))}
           </TableRow>
         ))}

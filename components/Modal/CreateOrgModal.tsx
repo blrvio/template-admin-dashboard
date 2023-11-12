@@ -86,7 +86,7 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
   };
   
 
-  const { organizations, addOrganization, currentSelectedOrganization } = useOrganizations();
+  const { organizations, addOrganization, currentSelectedOrganization, addProject } = useOrganizations();
 
   // Adiciona estados para manter os valores dos campos de formulário
   const [projectName, setProjectName] = useState("");
@@ -94,9 +94,8 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
   const [organizationName, setOrganizationName] = useState("");
   const [organizationDescription, setOrganizationDescription] = useState("");
   const [selectedOrganization, setSelectedOrganization] = useState(
-    currentSelectedOrganization.name
+    currentSelectedOrganization.id
   );
-
   // Handlers para atualizar os estados conforme os campos são preenchidos
   const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setProjectName(e.target.value);
   const handleProjectDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -105,19 +104,22 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
     setOrganizationName(e.target.value);
   const handleOrganizationDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setOrganizationDescription(e.target.value);
-  const handleOrganizationChange = (value: React.ChangeEvent<HTMLSelectElement>) => setSelectedOrganization(value);
+  const handleOrganizationChange = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedOrganization(event.target.value);
 
 
   const handleCreateProject = async () => {
+  console.log("Target Org:", selectedOrganization);
+  
     const projectData = {
       name: projectName,
-      description: projectDescription,
-      organization: selectedOrganization,
-      orgId: organizations.find((org) => org.name === selectedOrganization).id,
+      description: projectDescription || "",
+      thumbnail_url: "https://images.unsplash.com/photo-1542626991-cbc4e32524cc",
+      orgId: selectedOrganization,
     };
     try {
       // Aqui você substituiria por sua lógica de chamada de API para criar o projeto
       console.log('Enviando dados do projeto:', projectData);
+      addProject(projectData.orgId, projectData);
       // Fechar o modal após sucesso
       onOpenChange();
     } catch (error) {
@@ -194,13 +196,14 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
                         isRequired
                         label="Organization"
                         placeholder="Select an organization"
-                        defaultSelectedKeys={[organizations[0].id]}
-                        value={selectedOrganization}
+                        // defaultSelectedKeys={[selectedOrganization?.id]}
+                        // value={selectedOrganization}
                         onChange={handleOrganizationChange}
                         // className="max-w-xs"
+                        defaultSelectedKeys={[selectedOrganization]}
                       >
                         {organizations.map((org) => (
-                          <SelectItem key={org.id} value={org.name}>
+                          <SelectItem key={org.id} value={org.id}>
                             {org.name}
                           </SelectItem>
                         ))}

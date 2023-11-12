@@ -18,11 +18,13 @@ import {
   createProject as createProject_c,
   editProject as editProject_c,
   deleteProject as deleteProject_c,
+  getProjects,
 } from "../controllers/projects.controller";
 
 // Tipagem para o estado e funções disponíveis no contexto
 interface OrganizationsContextType {
   organizations: any[]; // Substitua any pelo tipo correto da sua organização
+  projects: any[];
   addOrganization: (data: any) => void;
   editOrg: (id: string, updatedData: any) => void;
   deleteOrg: (id: string) => void;
@@ -31,11 +33,14 @@ interface OrganizationsContextType {
   addProject: (orgId: string, projectData: any) => void;
   editProject: (orgId: string, projectId: string, projectData: any) => void;
   deleteProject: (orgId: string, projectId: string) => void;
+  currentSelectedProject: any;
+  setCurrentSelectedProject: (data: any) => void;
 }
 
 // Criação do contexto com um valor default
 const OrganizationsContext = createContext<OrganizationsContextType>({
   organizations: [],
+  projects: [],
   addOrganization: () => {},
   deleteOrg: () => {},
   editOrg: () => {},
@@ -44,6 +49,8 @@ const OrganizationsContext = createContext<OrganizationsContextType>({
   addProject: () => {},
   editProject: () => {},
   deleteProject: () => {},
+  currentSelectedProject: [],
+  setCurrentSelectedProject: () => {},
 });
 
 interface OrganizationsProviderProps {
@@ -58,7 +65,7 @@ export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ c
   // Selected items
   const [currentSelectedOrganization, setCurrentSelectedOrganization] =
     useState<any>([]);
-  const [selectedProject, setSelectedProject] = useState<any>([]);
+  const [currentSelectedProject, setCurrentSelectedProject] = useState<any>([]);
 
   const addOrganization = async (newData: any) => {
     // Substitua any pelo tipo correto do dado de sua organização
@@ -96,6 +103,8 @@ export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ c
     try {
       const newProject = await createProject_c(orgId, projectData);
       // Atualizar estado dos projetos aqui
+      console.log("criando novo projeto");
+      
     } catch (error) {
       console.error("Erro ao criar projeto:", error);
     }
@@ -128,21 +137,20 @@ export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ c
       try {
         const orgsData = await getOrganizations();
         setOrganizations(orgsData);
+        setCurrentSelectedOrganization(orgsData[0])
       } catch (error) {
         console.error("Erro ao buscar os dados da API", error);
       }
     };
     fetchOrgs();
-    console.log("organizations:", organizations);
-    
-    // setCurrentSelectedOrganization(organizations[0]);
   }, [user]);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectsData = await getOrganizations();
+        const projectsData = await getProjects(currentSelectedOrganization.id);
         setProjects(projectsData);
+        setCurrentSelectedProject(projectsData[0])
       } catch (error) {
         console.error("Erro ao buscar os dados da API", error);
       }
@@ -159,8 +167,11 @@ export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ c
         addOrganization,
         editOrg,
         deleteOrg,
+        projects,
         currentSelectedOrganization,
         setCurrentSelectedOrganization,
+        currentSelectedProject,
+        setCurrentSelectedProject,
         addProject,
         editProject,
         deleteProject,

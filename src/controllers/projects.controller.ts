@@ -16,6 +16,8 @@ async function getProjects(orgId: string) {
 async function createProject(orgId: string, data:any) {
   const endpoint = `/orgs/${orgId}/projects`;
   try {
+    console.log(data);
+    
     const newProject = await apiRequest(endpoint, "POST", data);
     return newProject;
   } catch (error) {
