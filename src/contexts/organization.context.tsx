@@ -127,6 +127,7 @@ export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ c
     try {
       await deleteProject_c(orgId, projectId);
       // Atualizar estado dos projetos aqui
+      setProjects((prevProects) => prevProects.filter((proj) => proj.id !== projectId))
     } catch (error) {
       console.error("Erro ao deletar projeto:", error);
     }

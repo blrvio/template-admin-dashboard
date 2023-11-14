@@ -13,6 +13,8 @@ import {
   Tab,
   Card,
   CardBody,
+  Breadcrumbs,
+  BreadcrumbItem,
 } from "@nextui-org/react";
 import { CreateOrgModal } from "./CreateOrgModal";
 import { OrganizationsTable } from "../Table/OrganizationsTable";
@@ -21,8 +23,9 @@ import { ProjectsTable } from "../Table/ProjectsTable";
 
 export const OrganizationModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { currentSelectedProject, projects } = useOrganizations();
-  
+  const { currentSelectedProject, projects,organizations, currentSelectedOrganization } =
+    useOrganizations();
+
   return (
     <>
       <Select
@@ -30,9 +33,7 @@ export const OrganizationModal = () => {
         label={currentSelectedProject?.name || "Select a project"}
         className="max-w-xs"
         onClick={onOpen}
-      >
-
-      </Select>
+      ></Select>
       <Modal
         isOpen={isOpen}
         backdrop="blur"
@@ -47,10 +48,34 @@ export const OrganizationModal = () => {
                 Projects
               </ModalHeader>
               <ModalBody>
+                <Breadcrumbs>
+                  {currentSelectedOrganization ? (
+                    <BreadcrumbItem>
+                      {currentSelectedOrganization.name}
+                    </BreadcrumbItem>
+                  ) : (
+                    <BreadcrumbItem>select organization</BreadcrumbItem>
+                  )}
+                  {currentSelectedProject && currentSelectedOrganization ? (
+                    <BreadcrumbItem>
+                      {currentSelectedProject.name}
+                    </BreadcrumbItem>
+                  ) : (
+                    <BreadcrumbItem>select project</BreadcrumbItem>
+                  )}
+                </Breadcrumbs>
                 <div className="flex w-full flex-col">
                   <Tabs aria-label="Options">
                     <Tab key="music" title="Orgs">
-                      <OrganizationsTable />
+                    {organizations && organizations.length > 0 ? (
+                        <OrganizationsTable />
+                      ) : (
+                        <div>
+                          <p>Nenhuma organização disponível. Crie um!</p>
+                          <CreateOrgModal buttonTitle="Org" />
+                        </div>
+                      )}
+                      
                     </Tab>
                     <Tab
                       key="videos"
@@ -61,8 +86,8 @@ export const OrganizationModal = () => {
                         <ProjectsTable />
                       ) : (
                         <div>
-                          Nenhuma organização disponível. Crie uma nova
-                          organização.
+                          <p>Nenhum projeto disponível. Crie um!</p>
+                          <CreateOrgModal buttonTitle={"Project"}/>
                         </div>
                       )}
                     </Tab>

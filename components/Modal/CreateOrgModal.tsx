@@ -16,7 +16,7 @@ import {
 } from "@nextui-org/react";
 import { useOrganizations } from "@/src/contexts/organization.context";
 
-export const CreateOrgModal = () => {
+export const CreateOrgModal = ({buttonTitle}) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selected, setSelected] = React.useState("login");
 
@@ -148,7 +148,7 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
   return (
     <>
       <Button onPress={onOpen} color="primary">
-        Open Modal
+        Create {buttonTitle}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent className="min-w-[300px] min-h-[650px]">
