@@ -22,7 +22,7 @@ interface AddressComponent {
 }
 
 async function buscarDadosPorCep(zipCode: string): Promise<AddressData | null> {
-    const apiKey = 'SUA_CHAVE_API';
+    const apiKey = process.env.NEXT_PUBLIC_API_GOOGLE_MAPS_KEY;
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${apiKey}`;
 
     const getCityNameComponent = (addressComponents: AddressComponent[], ...types: string[]) => {
