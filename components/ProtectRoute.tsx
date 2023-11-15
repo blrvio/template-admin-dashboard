@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { useAuth } from '@/src/contexts/auth.context';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { Loader } from './Loader';
 
 interface ProtectRouteProps {
   children: ReactNode;
@@ -19,7 +20,7 @@ const ProtectRoute = ({ children }: ProtectRouteProps) => {
   }, [user, loading, router]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (!user) {

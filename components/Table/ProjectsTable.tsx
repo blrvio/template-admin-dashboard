@@ -72,7 +72,7 @@ export const ProjectsTable = () => {
         return (
           <div className="flex items-center gap-2">
             <Tooltip content="Details">
-              <EyeIcon />
+              <span><EyeIcon /></span>
             </Tooltip>
             <Tooltip content="Edit user">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
@@ -80,13 +80,15 @@ export const ProjectsTable = () => {
               </span>
             </Tooltip>
             <Tooltip content="Delete" color="danger">
-              <DeleteResourceModal
-                context={"projeto"}
-                resource={project}
-                deleteResource={() =>
-                  handleDelete(project.resource_data.org_id, project.id)
-                }
-              />
+              <span>
+                <DeleteResourceModal
+                  context={"projeto"}
+                  resource={project}
+                  deleteResource={() =>
+                    handleDelete(project.resource_data.org_id, project.id)
+                  }
+                />
+              </span>
             </Tooltip>
           </div>
         );

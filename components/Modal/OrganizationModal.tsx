@@ -68,6 +68,8 @@ export const OrganizationModal = () => {
                   <Tabs aria-label="Options">
                     <Tab key="music" title="Orgs">
                     {organizations && organizations.length > 0 ? (
+                      // TODO: encontrar erro 404
+                      // pelo que pude identificar, está relacionado ao componente organizationsTable
                         <OrganizationsTable />
                       ) : (
                         <div>

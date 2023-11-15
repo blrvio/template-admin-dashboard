@@ -12,18 +12,11 @@ import {
   Pagination,
   Selection,
 } from "@nextui-org/react";
-import { EditIcon } from "../Icons/EditIcon";
-import { DeleteIcon } from "../Icons/DeleteIcon";
 import { EyeIcon } from "../Icons/EyeIcon";
 import { useOrganizations } from "@/src/contexts/organization.context";
 import { EditOrgModal } from "../Modal/EditOrgModal";
 import DeleteResourceModal from "../Modal/DeleteResourceModal";
 
-const organizationStatusColor = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
 
 export const OrganizationsTable = () => {
   const {
@@ -83,7 +76,7 @@ export const OrganizationsTable = () => {
         return (
           <div className="flex items-center gap-2">
             <Tooltip content="Details">
-              <EyeIcon />
+              <span><EyeIcon /></span>
             </Tooltip>
             <Tooltip content="Edit user">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
@@ -91,11 +84,11 @@ export const OrganizationsTable = () => {
               </span>
             </Tooltip>
             <Tooltip content="Delete" color="danger">
-              <DeleteResourceModal
+<span>              <DeleteResourceModal
                 context={"organization"}
                 resource={organization}
                 deleteResource={() => handleDelete(organization.id)}
-              />
+              /></span>
             </Tooltip>
           </div>
         );
