@@ -90,7 +90,7 @@ export default function PersonalPreferences() {
     console.log("Dados do usuário:", userData);
     
     setTimeout(() => {
-      router.push(`/onboar/personal-preferences?uname=${userDisplayName}`);
+      router.push(`/onboard/personal-preferences?uname=${userDisplayName}`);
     }, 1000);
   };
 
