@@ -3,7 +3,7 @@ export function authHandler(handler: Function, setIsLoading: Function, router: a
     setIsLoading(true);
     if (typeof handler === "function") {
       handler().then(() => {
-        router.push("/console/about");
+        router.push("/onboard/first-organization");
         setIsLoading(false);
       });
     }

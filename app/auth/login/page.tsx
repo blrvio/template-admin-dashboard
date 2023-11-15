@@ -54,7 +54,7 @@ export default function LoginPage() {
     setIsLoading(true);
     signIn(email, password).then((user) => {
       setIsLoading(false);
-      router.push("/console/about");
+      router.push("/onboard/first-organization");
     });
   };
 
