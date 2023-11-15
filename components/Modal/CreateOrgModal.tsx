@@ -94,7 +94,7 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
   const [organizationName, setOrganizationName] = useState("");
   const [organizationDescription, setOrganizationDescription] = useState("");
   const [selectedOrganization, setSelectedOrganization] = useState(
-    currentSelectedOrganization.id
+    currentSelectedOrganization?.id
   );
   // Handlers para atualizar os estados conforme os campos são preenchidos
   const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setProjectName(e.target.value);
