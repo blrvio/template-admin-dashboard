@@ -125,12 +125,10 @@ export const OrganizationsTable = () => {
   const onOrganizationSelected = (keys: Selection) => {
     if (keys === "all") {
       // Trate o caso em que todas as linhas estão selecionadas
-      console.log("Todas as linhas selecionadas");
     } else if (keys instanceof Set) {
       // Trate o caso em que um conjunto específico de chaves está selecionado
       // Como a seleção é 'single', você pode querer acessar o primeiro elemento do Set
       const selectedKey = keys.values().next().value;
-      console.log(selectedKey);
       setCurrentSelectedOrganization(
         organizations.find((org) => org.id === selectedKey)
       );

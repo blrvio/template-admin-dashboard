@@ -39,7 +39,6 @@ export default function RegisterPage() {
     // Verifica se o email é válido
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
-      console.log("Email inválido.");
       setIsEmailInvalid(true);
       setIsLoading(false);
       return;
@@ -51,7 +50,6 @@ export default function RegisterPage() {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$/;
     if (!passwordRegex.test(password)) {
-      console.log("A senha não atende aos requisitos mínimos.");
       setIsLoading(false);
       setIsPasswordInvalid(true);
       return;

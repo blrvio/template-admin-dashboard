@@ -4,8 +4,6 @@ async function getOrganizations() {
   const endpoint = "/orgs"; // Endpoint para buscar as organizações
   try {
     const organizations = await apiRequest(endpoint);
-    console.log(organizations[0]);
-    
     return organizations; // Deve ser um array de acordo com a resposta da sua API
   } catch (error) {
     console.error("Erro ao buscar organizações:", error);

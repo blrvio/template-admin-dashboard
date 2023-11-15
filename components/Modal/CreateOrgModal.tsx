@@ -40,9 +40,6 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
       body: formData,
     })
     .then((response) => response.json())
-    .then((data) => {
-      console.log("Arquivo enviado com sucesso:", data);
-    })
     .catch((error) => {
       console.error("Erro ao enviar o arquivo:", error);
     });
@@ -74,10 +71,6 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
         }
         return response.json(); // Converta a resposta em JSON
       })
-      .then((data) => {
-        console.log("Arquivo enviado com sucesso:", data);
-        // Aqui você pode implementar qualquer lógica adicional após o sucesso do upload
-      })
       .catch((error) => {
         console.error("Erro ao enviar o arquivo:", error);
         // Tratamento adicional de erros pode ser feito aqui
@@ -108,7 +101,6 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
 
 
   const handleCreateProject = async () => {
-  console.log("Target Org:", selectedOrganization);
   
     const projectData = {
       name: projectName,
@@ -118,7 +110,6 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
     };
     try {
       // Aqui você substituiria por sua lógica de chamada de API para criar o projeto
-      console.log('Enviando dados do projeto:', projectData);
       addProject(projectData.orgId, projectData);
       // Fechar o modal após sucesso
       onOpenChange();
@@ -135,7 +126,6 @@ const handleProjectFileChange = (event: React.ChangeEvent<HTMLInputElement>) => 
     };
     try {
       // Aqui você substituiria por sua lógica de chamada de API para criar a organização
-      console.log('Enviando dados da organização:', organizationData);
       addOrganization(organizationData);
       // Fechar o modal após sucesso
       onOpenChange();

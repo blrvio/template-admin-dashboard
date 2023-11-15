@@ -19,12 +19,10 @@ async function uploadOrgThumbnail(orgId: string, file: any) {
     await uploadBytes(storageRef, file, {
       contentType: "image/jpeg",
     }).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
     });
 
     return await getDownloadURL(storageRef);
   } catch (error) {
-    console.error("Erro no upload do arquivo:", error);
     throw error;
   }
 }
@@ -45,8 +43,6 @@ async function uploadProjectThumbnail(orgId: string, projectId: string, file: an
   
       await uploadBytes(storageRef, file, {
         contentType: "image/jpeg",
-      }).then((snapshot) => {
-        console.log("Uploaded a blob or file!");
       });
   
       return await getDownloadURL(storageRef);

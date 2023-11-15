@@ -16,7 +16,6 @@ export default function LoginPage() {
     // Verifica se o email é válido
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
-      console.log("Email inválido.");
       setIsEmailInvalid(true);
       setIsLoading(false);
       return;

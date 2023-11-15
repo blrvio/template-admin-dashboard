@@ -61,9 +61,6 @@ export const EditProjectModal = ({ project, onEdit }: EditProjectModalProps) => 
     };
     try {
       // Aqui você substituiria por sua lógica de chamada de API para criar a organização
-      console.log("Enviando dados da organização:", projectData);
-      console.log(project.resource_data.org_id);
-      
       onEdit(project.resource_data.org_id, project.id, projectData); // Fechar o modal após sucesso
       onOpenChange();
     } catch (error) {
@@ -82,7 +79,6 @@ export const EditProjectModal = ({ project, onEdit }: EditProjectModalProps) => 
     const file = event.target.files![0];
     if (file) {
       // Aqui você pode adicionar a lógica para fazer o upload da imagem
-      console.log('Arquivo selecionado:', file);
       uploadOrgThumbnail(project.id, file).then((url) => {
         setSelectedImage(url);
       });
