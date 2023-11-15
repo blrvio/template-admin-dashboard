@@ -32,8 +32,8 @@ export const OrganizationModal = () => {
         size={"sm"}
         label={currentSelectedProject?.name || "Select a project"}
         className="max-w-xs"
-        onClick={onOpen}
-      ></Select>
+        onClick={onOpen} >
+        </Select>
       <Modal
         isOpen={isOpen}
         backdrop="blur"
@@ -72,7 +72,7 @@ export const OrganizationModal = () => {
                       ) : (
                         <div>
                           <p>Nenhuma organização disponível. Crie um!</p>
-                          <CreateOrgModal buttonTitle="Org" />
+                          <CreateOrgModal />
                         </div>
                       )}
                       
@@ -87,7 +87,7 @@ export const OrganizationModal = () => {
                       ) : (
                         <div>
                           <p>Nenhum projeto disponível. Crie um!</p>
-                          <CreateOrgModal buttonTitle={"Project"}/>
+                          <CreateOrgModal />
                         </div>
                       )}
                     </Tab>

@@ -15,7 +15,8 @@ export default function Sidebar() {
         {/* Sidebar component, split into logo and navigation */}
         <Navbar isBordered maxWidth="full" className="bg-default-200" > 
           <NavbarBrand>
-          <OrganizationModal />
+          <Logo />
+          <p className="hidden sm:block font-bold text-inherit">ACME</p>
           </NavbarBrand>
         </Navbar>
         <div className="mt-5 flex-grow flex flex-col">

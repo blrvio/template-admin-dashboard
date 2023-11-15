@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, useRef, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -19,36 +19,52 @@ import { EditIcon } from "../Icons/EditIcon";
 import { EditOrgModalProps } from "@/src/interfaces/organization.interfaces";
 import { uploadOrgThumbnail } from "@/src/services/storage.service";
 
-export const EditOrgModal = ({ organization, onEdit }: EditOrgModalProps) => {
+interface EditProjectModalProps {
+  project: {
+    id: string;
+    name: string;
+    description: string;
+    thumbnail_url: string;
+    resource_data: {
+      org_id: string;
+    };
+    // Adicione outras propriedades do projeto que você precisa aqui
+  };
+  onEdit: (orgId: string, projectId: string, projectData: any) => void; // Atualize com os tipos corretos
+}
+
+export const EditProjectModal = ({ project, onEdit }: EditProjectModalProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  // uploadOrgThumbnail(organization.id)
+  // uploadOrgThumbnail(project.id)
 
   // Adiciona estados para manter os valores dos campos de formulário
-  const [organizationName, setOrganizationName] = useState(organization.name);
-  const [organizationDescription, setOrganizationDescription] = useState(
-    organization.description
+  const [projectName, setProjectName] = useState(project.name);
+  const [projectDescription, setProjectDescription] = useState(
+    project.description
   );
 
   // Handlers para atualizar os estados conforme os campos são preenchidos
-  const handleOrganizationNameChange = (
+  const handleProjectNameChange = (
     e: React.ChangeEvent<HTMLInputElement>
-  ) => setOrganizationName(e.target.value);
-  const handleOrganizationDescriptionChange = (
+  ) => setProjectName(e.target.value);
+  const handleProjectDescriptionChange = (
     e: React.ChangeEvent<HTMLInputElement>
-  ) => setOrganizationDescription(e.target.value);
+  ) => setProjectDescription(e.target.value);
 
   // Handler para criar organização
-  const handleEditOrganization = async () => {
-    const organizationData = {
-      name: organizationName,
-      description: organizationDescription,
+  const handleEditProject = async () => {
+    const projectData = {
+      name: projectName,
+      description: projectDescription,
       thumbnail_url: selectedImage,
     };
     try {
       // Aqui você substituiria por sua lógica de chamada de API para criar a organização
-      console.log("Enviando dados da organização:", organizationData);
-      onEdit(organization.id, organizationData); // Fechar o modal após sucesso
+      console.log("Enviando dados da organização:", projectData);
+      console.log(project.resource_data.org_id);
+      
+      onEdit(project.resource_data.org_id, project.id, projectData); // Fechar o modal após sucesso
       onOpenChange();
     } catch (error) {
       console.error("Erro ao editar a organização:", error);
@@ -56,24 +72,23 @@ export const EditOrgModal = ({ organization, onEdit }: EditOrgModalProps) => {
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedImage, setSelectedImage] = useState(organization!.thumbnail_url);
+  const [selectedImage, setSelectedImage] = useState(project!.thumbnail_url);
 
   const handleImageClick = () => {
     fileInputRef?.current?.click();
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Verifique se algum arquivo foi selecionado
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+    if (file) {
       // Aqui você pode adicionar a lógica para fazer o upload da imagem
       console.log('Arquivo selecionado:', file);
-      uploadOrgThumbnail(organization.id, file).then((url) => {
+      uploadOrgThumbnail(project.id, file).then((url) => {
         setSelectedImage(url);
       });
+      
     }
   };
-  
 
   return (
     <>
@@ -85,7 +100,7 @@ export const EditOrgModal = ({ organization, onEdit }: EditOrgModalProps) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Edit Organization
+                Edit Project
               </ModalHeader>
               <ModalBody>
                 <form className="flex flex-col items-center gap-4">
@@ -109,17 +124,17 @@ export const EditOrgModal = ({ organization, onEdit }: EditOrgModalProps) => {
                   />
                   <Input
                     isRequired
-                    label="Organization Name"
-                    placeholder="Enter Organization name, ex: My Organization"
-                    value={organizationName}
-                    onChange={handleOrganizationNameChange}
+                    label="Project Name"
+                    placeholder="Enter Project name, ex: My Project"
+                    value={projectName}
+                    onChange={handleProjectNameChange}
                     type="text"
                   />
                   <Input
-                    label="Organization Description"
-                    placeholder="Describe Organization"
-                    value={organizationDescription}
-                    onChange={handleOrganizationDescriptionChange}
+                    label="Project Description"
+                    placeholder="Describe Project"
+                    value={projectDescription}
+                    onChange={handleProjectDescriptionChange}
                     type="text"
                   />
                 </form>
@@ -127,8 +142,8 @@ export const EditOrgModal = ({ organization, onEdit }: EditOrgModalProps) => {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onPress={handleEditOrganization}>
-                    Edit Organization
+                  <Button color="primary" onPress={handleEditProject}>
+                    Edit Project
                   </Button>
                 </ModalFooter>
               </ModalBody>

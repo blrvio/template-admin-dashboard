@@ -17,6 +17,7 @@ import { DeleteIcon } from "../Icons/DeleteIcon";
 import { EyeIcon } from "../Icons/EyeIcon";
 import { useOrganizations } from "@/src/contexts/organization.context";
 import { EditOrgModal } from "../Modal/EditOrgModal";
+import DeleteResourceModal from "../Modal/DeleteResourceModal";
 
 const organizationStatusColor = {
   active: "success",
@@ -90,11 +91,11 @@ export const OrganizationsTable = () => {
               </span>
             </Tooltip>
             <Tooltip content="Delete" color="danger">
-              <div onClick={() => handleDelete(organization.id)}>
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <DeleteIcon />
-                </span>
-              </div>
+              <DeleteResourceModal
+                context={"organization"}
+                resource={organization}
+                deleteResource={() => handleDelete(organization.id)}
+              />
             </Tooltip>
           </div>
         );

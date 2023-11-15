@@ -104,7 +104,7 @@ export const OrganizationsProvider: React.FC<OrganizationsProviderProps>  = ({ c
       const newProject = await createProject_c(orgId, projectData);
       // Atualizar estado dos projetos aqui
       console.log("criando novo projeto");
-      
+      setProjects((prevProjects) => [...prevProjects, newProject]);
     } catch (error) {
       console.error("Erro ao criar projeto:", error);
     }

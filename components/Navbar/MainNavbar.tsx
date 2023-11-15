@@ -15,6 +15,7 @@ import { Logo, SearchIcon } from "../icons";
 import { Kbd } from "@nextui-org/kbd";
 import { useAuth } from "@/src/contexts/auth.context";
 import { signOut } from "@/src/services/auth.service";
+import { OrganizationModal } from "../Modal/OrganizationModal";
 
 export const MainNavbar = () => {
   const {user} = useAuth();
@@ -63,9 +64,9 @@ export const MainNavbar = () => {
     >
       <NavbarContent justify="start">
         <NavbarBrand className="mr-4">
-          <Logo />
-          <p className="hidden sm:block font-bold text-inherit">ACME</p>
+          <OrganizationModal />
         </NavbarBrand>
+
 
       </NavbarContent>
 

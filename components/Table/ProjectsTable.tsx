@@ -14,25 +14,26 @@ import {
 } from "@nextui-org/react";
 import { DeleteIcon } from "../Icons/DeleteIcon";
 import { EyeIcon } from "../Icons/EyeIcon";
-import { EditOrgModal } from "../Modal/EditOrgModal";
 import { useOrganizations } from "@/src/contexts/organization.context";
-
-const organizationStatusColor = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
+import { EditProjectModal } from "../Modal/EditProjectModal";
+import DeleteResourceModal from "../Modal/DeleteResourceModal";
 
 export const ProjectsTable = () => {
-  const { projects, deleteOrg, editOrg, deleteProject, setCurrentSelectedProject, currentSelectedProject} = useOrganizations();
+  const {
+    projects,
+    editProject,
+    deleteProject,
+    setCurrentSelectedProject,
+    currentSelectedProject,
+  } = useOrganizations();
 
   const handleDelete = (organizationId: string, projectId: string) => {
     // Confirmação de exclusão e chamada da função de contexto para excluir
     deleteProject(organizationId, projectId);
   };
 
-  const renderOrganizationCell = useCallback((organization: any, key: any) => {
-    const value = organization[key];
+  const renderOrganizationCell = useCallback((project: any, key: any) => {
+    const value = project[key];
 
     switch (key) {
       case "name":
@@ -41,7 +42,7 @@ export const ProjectsTable = () => {
             avatarProps={{
               radius: "lg",
               src:
-                organization.thumbnail_url ||
+                project.thumbnail_url ||
                 "https://images.unsplash.com/photo-1470075801209-17f9ec0cada6",
             }}
             name={value}
@@ -52,7 +53,7 @@ export const ProjectsTable = () => {
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{value}</p>
             <p className="text-bold text-sm capitalize text-default-400">
-              {organization.team}
+              {project.team}
             </p>
           </div>
         );
@@ -75,22 +76,17 @@ export const ProjectsTable = () => {
             </Tooltip>
             <Tooltip content="Edit user">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditOrgModal organization={organization} onEdit={editOrg} />
+                <EditProjectModal project={project} onEdit={editProject} />
               </span>
             </Tooltip>
             <Tooltip content="Delete" color="danger">
-              <div
-                onClick={() =>
-                  handleDelete(
-                    organization.resource_data.org_id,
-                    organization.id
-                  )
+              <DeleteResourceModal
+                context={"projeto"}
+                resource={project}
+                deleteResource={() =>
+                  handleDelete(project.resource_data.org_id, project.id)
                 }
-              >
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <DeleteIcon />
-                </span>
-              </div>
+              />
             </Tooltip>
           </div>
         );
@@ -126,9 +122,7 @@ export const ProjectsTable = () => {
       // Como a seleção é 'single', você pode querer acessar o primeiro elemento do Set
       const selectedKey = keys.values().next().value;
       console.log(selectedKey);
-      setCurrentSelectedProject(
-        projects.find((prj) => prj.id === selectedKey)
-      );
+      setCurrentSelectedProject(projects.find((prj) => prj.id === selectedKey));
     }
   };
 
