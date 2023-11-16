@@ -14,7 +14,7 @@ import { Input } from "@nextui-org/input";
 
 import { link as linkStyles } from "@nextui-org/theme";
 
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/src/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 
@@ -24,9 +24,9 @@ import {
 	DiscordIcon,
 	HeartFilledIcon,
 	SearchIcon,
-} from "@/components/icons";
+} from "@/src/components/icons";
 
-import { Logo } from "@/components/icons";
+import { Logo } from "@/src/components/icons";
 
 export const Navbar = () => {
 	const searchInput = (

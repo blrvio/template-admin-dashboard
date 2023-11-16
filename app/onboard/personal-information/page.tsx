@@ -4,7 +4,7 @@ import { Input } from "@nextui-org/input";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Modifiquei de 'next/navigation' para 'next/router'
 import { buscarDadosPorCep } from "../../../src/services/maps.service";
-import { countryList } from "@/config/countryList";
+import { countryList } from "@/src/config/countryList";
 
 interface AddressObject {
   country?: string;

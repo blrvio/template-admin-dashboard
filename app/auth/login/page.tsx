@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { EyeFilledIcon } from "@/components/Icons/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "@/components/Icons/EyeSlashFilledIcon";
-import { FacebookIcon, GoogleIcon } from "@/components/Table/SocialIcons";
+import { EyeFilledIcon } from "@/src/components/Icons/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "@/src/components/Icons/EyeSlashFilledIcon";
+import { FacebookIcon, GoogleIcon } from "@/src/components/Table/SocialIcons";
 import { Button, Divider, Input } from "@nextui-org/react";
 import { useState } from "react";
 import Link from "next/link";

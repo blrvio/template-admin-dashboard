@@ -3,7 +3,7 @@ import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Chip } from "@nextui-org/react";
-import preferences from "@/config/userSubjects";
+import preferences from "@/src/config/userSubjects";
 
 export default function PersonalPreferences() {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);

@@ -1,5 +1,5 @@
 "use client";
-import ProtectRoute from "@/components/ProtectRoute";
+import ProtectRoute from "@/src/components/ProtectRoute";
 import { Progress } from "@nextui-org/react";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation"; // Importando useRouter

@@ -1,5 +1,5 @@
 "use client";
-import { Logo } from "@/components/icons";
+import { Logo } from "@/src/components/icons";
 import Image from "next/image";
 
 export default function DocsLayout({

@@ -1,6 +1,6 @@
-import Sidebar from "@/components/Sidebar/MainSidebar";
-import { MainNavbar } from "@/components/Navbar/MainNavbar";
-import ProtectRoute from "@/components/ProtectRoute";
+import Sidebar from "@/src/components/Sidebar/MainSidebar";
+import { MainNavbar } from "@/src/components/Navbar/MainNavbar";
+import ProtectRoute from "@/src/components/ProtectRoute";
 import React, { ReactNode } from 'react';
 
 
