@@ -44,7 +44,6 @@ export default function RootLayout({
             <main>{children}</main>
             </OrganizationsProvider>
           </AuthProvider>
-          
         </Providers>
       </body>
     </html>

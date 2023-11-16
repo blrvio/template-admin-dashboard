@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps } from 'firebase/app';
+import { Analytics, getAnalytics } from "firebase/analytics";
+import { initializeApp, getApps } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,4 +19,12 @@ const firebaseConfig = {
 let firebase_app =
   getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
+let firebase_analytics:Analytics;
+// Inicializa a Firebase Analytics apenas no lado do cliente
+if (typeof window !== 'undefined') {
+  console.log("Inicializando Firebase Analytics");
+  firebase_analytics = getAnalytics(firebase_app);
+}
+
 export default firebase_app;
+export {firebase_app, firebase_analytics}

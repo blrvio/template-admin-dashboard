@@ -2,7 +2,8 @@
 "use client";
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import firebase_app from '../services/firebase.service';
+import firebase_app, { firebase_analytics } from '../services/firebase.service';
+import { setUserId } from 'firebase/analytics';
 
 const auth = getAuth(firebase_app);
 
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        setUserId(firebase_analytics, user.uid);
       } else {
         setUser(null);
       }
