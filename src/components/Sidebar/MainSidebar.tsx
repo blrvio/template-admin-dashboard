@@ -4,7 +4,7 @@ import { Logo } from "../icons";
 import { sidebarNavigationItens } from "../setings/setings";
 import { OrganizationModal } from "../Modal/OrganizationModal";
 
-function classNames(...classes: string[]) {
+function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
