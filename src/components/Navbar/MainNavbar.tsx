@@ -19,6 +19,9 @@ import { OrganizationModal } from "../Modal/OrganizationModal";
 
 export const MainNavbar = () => {
   const {user} = useAuth();
+
+  console.log("vamos ver como ficou o objeto user:", user);
+  
   const searchInput = (
     <Input
       classNames={{
@@ -105,8 +108,8 @@ export const MainNavbar = () => {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">{user?.displayName}</p>
-              <p className="font-semibold">{user?.email}</p>
+              <p className="font-semibold">{user?.appdata.thumbnail_url}</p>
+              <p className="font-semibold">{user?.appdata.resource_data.email}</p>
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
             <DropdownItem key="team_settings">Team Settings</DropdownItem>
